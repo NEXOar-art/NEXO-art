@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Landings 100% estáticas que facturan solas • Básico $85k • Avanzado $120k • Premium $180k"/>
+  <title>NEXOar-Art | Landing que Convierte Sola</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+          colors: { primary: '#00F0FF', secondary: '#FF00FF', accent: '#39FF14' },
+          animation: { slideDown: 'slideDown 0.6s ease-out', pulseBtn: 'pulse 2s infinite' },
+          keyframes: { slideDown: { '0%': { opacity:0, transform:'translateY(-50px)' }, '100%': { opacity:1, transform:'translateY(0)' } } }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background:#050511; color:white; overflow-x:hidden; }
+    .glass { background:rgba(255,255,255,0.06); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.12); }
+    .gradient-text { background:linear-gradient(90deg,#00F0FF,#FF00FF,#39FF14,#00F0FF); background-size:400%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:gradient 6s ease infinite; }
+    @keyframes gradient { 0%{background-position:0% 50%}100%{background-position:100% 50%}}
+    #particles-js { position:fixed; inset:0; z-index:1; pointer-events:none; }
+  </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-black">
+
+  <!-- MODAL DE WHATSAPP -->
+  <div id="whatsappModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-6">
+    <div class="glass p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown">
+      <h3 class="text-4xl font-black mb-6 text-center">¡Último paso!</h3>
+      <p class="text-center text-xl mb-8">Te redirigimos a WhatsApp con tu propuesta personalizada</p>
+
+      <input type="text" id="modalNombre" placeholder="Tu nombre" class="w-full px-6 py-5 glass border border-white/20 rounded-2xl mb-4 focus:border-primary focus:outline-none" required>
+      <input type="email" id="modalEmail" placeholder="Email (opcional)" class="w-full px-6 py-5 glass border border-white/20 rounded-2xl mb-8 focus:border-primary focus:outline-none">
+
+      <input type="hidden" id="modalPlan">
+
+      <div class="flex gap-4">
+        <button onclick="cerrarModal()" class="flex-1 py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition">
+          Cancelar
+        </button>
+        <button onclick="enviarWhatsApp()" class="flex-1 py-5 bg-gradient-to-r from-green-500 to-emerald-500 text-black font-black text-xl rounded-2xl hover:scale-105 transition shadow-xl">
+          Enviar por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="particles-js"></div>
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center justify-center px-6 pt-20">
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-dark/95 to-black"></div>
+
+    <div class="relative z-10 text-center max-w-7xl mx-auto">
+      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black leading-tight mb-10">
+        TU LANDING<br><span class="gradient-text">FACTURA SOLA</span>
+      </h1>
+      <p class="text-2xl md:text-4xl font-bold text-gray-200 mb-12">
+        100% estática • carga en menos de 0.8s • IA clasifica tus leads automáticamente
+      </p>
+      <button onclick="abrirModal('Básico')" class="px-16 py-8 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-2xl rounded-3xl hover:scale-105 transform transition shadow-2xl">
+        EMPEZAR YA
+      </button>
+    </div>
+  </section>
+
+  <!-- MENSAJE ESTÁTICO -->
+  <section class="py-16 bg-black/50 backdrop-blur-xl text-center">
+    <p class="text-2xl md:text-3xl font-black text-primary mb-4">
+      Todas nuestras webs son 100% estáticas (HTML + CSS + JS)
+    </p>
+    <p class="text-xl text-gray-300">
+      Carga instantánea • Puntaje 100/100 Google • Nunca se cae • Sin hosting caro
+    </p>
+  </section>
+
+  <!-- PLANES CON BOTONES A WHATSAPP -->
+  <section class="py-32 px-6 max-w-7xl mx-auto">
+    <h2 class="text-6xl md:text-8xl font-black text-center mb-20">ELIGÍ TU RESULTADO</h2>
+    <div class="grid md:grid-cols-3 gap-12">
+
+      <!-- BÁSICO -->
+      <div class="glass p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center">
+        <h3 class="text-4xl font-black mb-4">Básico</h3>
+        <div class="text-6xl font-black mb-8">$85.000</div>
+        <ul class="text-left space-y-5 text-gray-300 text-lg mb-10">
+          <li>Landing 100% estática</li>
+          <li>Diseño premium responsive</li>
+          <li>Formulario de captura</li>
+          <li>Entrega en 5–7 días</li>
+        </ul>
+        <button onclick="abrirModal('Básico')" class="w-full py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-xl rounded-2xl hover:scale-105 transition shadow-xl">
+          EMPEZAR YA
+        </button>
+      </div>
+
+      <!-- AVANZADO -->
+      <div class="glass p-12 rounded-3xl border-4 border-primary shadow-2xl shadow-primary/60 transform scale-110 relative overflow-hidden">
+        <div class="absolute top-4 right-4 bg-gradient-to-r from-primary to-cyan-400 text-black px-8 py-3 rounded-full font-black text-lg">MÁS VENDIDO</div>
+        <h3 class="text-5xl font-black mb-6">Avanzado</h3>
+        <div class="text-7xl font-black text-primary mb-8">$120.000</div>
+        <ul class="text-left space-y-5 text-gray-200 text-lg mb-12">
+          <li>Todo lo del Básico</li>
+          <li>Animaciones premium</li>
+          <li>CRM automático</li>
+          <li>Clasificación IA de leads</li>
+          <li>Diagnóstico mensual</li>
+        </ul>
+        <button onclick="abrirModal('Avanzado')" class="w-full py-7 bg-primary text-black font-black text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl">
+          RESERVAR MI AVANZADO
+        </button>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="glass p-12 rounded-3xl border border-secondary/50 hover:border-secondary transition text-center">
+        <h3 class="text-4xl font-black mb-4">Premium</h3>
+        <div class="text-6xl font-black text-secondary mb-8">$180.000</div>
+        <ul class="text-left space-y-5 text-gray-300 text-lg mb-10">
+          <li>Todo lo del Avanzado</li>
+          <li>Web completa full custom</li>
+          <li>SEO técnico avanzado</li>
+          <li>Mantenimiento mensual</li>
+          <li>Estrategia 1 a 1</li>
+        </ul>
+        <button onclick="abrirModal('Premium')" class="w-full py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-xl rounded-2xl hover:scale-105 transition">
+          DOMINAR MI MERCADO
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPT COMPLETO -->
+  <script>
+    // === ABRIR MODAL CON PLAN PRESELECCIONADO ===
+    function abrirModal(plan) {
+      document.getElementById('modalPlan').value = plan;
+      document.getElementById('whatsappModal').classList.remove('hidden');
+      document.getElementById('modalNombre').focus();
+    }
+
+    function cerrarModal() {
+      document.getElementById('whatsappModal').classList.add('hidden');
+    }
+
+    // === ENVIAR A WHATSAPP CON MENSAJE PERSUASIVO + EMOJIS ===
+    function enviarWhatsApp() {
+      const nombre = document.getElementById('modalNombre').value.trim();
+      const email = document.getElementById('modalEmail').value.trim();
+      const plan = document.getElementById('modalPlan').value;
+
+      if (!nombre) {
+        alert("Por favor, ingresá tu nombre");
+        return;
+      }
+
+      const mensajes = {
+        "Básico": "Hola NEXO-Art! Me llamo " + nombre + " y quiero el plan BÁSICO por $85.000. ¡Empecemos ya!",
+        "Avanzado": "Hola NEXO-Art! Soy " + nombre + " y quiero el plan AVANZADO por $120.000. ¡Es el más vendido y necesito que mi landing que facture sola!",
+        "Premium": "Hola NEXO-Art! Mi nombre es " + nombre + " y quiero el plan PREMIUM por $180.000. ¡Quiero dominar mi mercado con una web full custom!"
+      };
+
+      let mensaje = mensajes[plan] || mensajes["Avanzado"];
+
+      if (email) mensaje += " Mi email es: " + email;
+
+      const textoFinal = encodeURIComponent(mensaje);
+      window.open(`https://api.whatsapp.com/send?phone=+543489686939&text=${textoFinal}`, '_blank');
+
+      // Opcional: guardar en tu CRM
+      // fetch(CRM_WEBHOOK, {method:"POST", mode:"no-cors", body:JSON.stringify({nombre, plan, email, origen:"Botón directo"})});
+
+      cerrarModal();
+    }
+
+    // === PARTÍCULAS + EFECTOS ===
+    particlesJS("particles-js", { particles: { number: { value: 80 }, color: { value: "#00F0FF" }, opacity: { value: 0.4 }, size: { value: 3 }, line_linked: { enable: true, distance: 150, color: "#00F0FF", opacity: 0.2 }, move: { enable: true, speed: 2 } }, interactivity: { events: { onhover: { enable: true, mode: "repulse" } } } });
+
+    // === DESPLEGABLES DE LAS TARJETAS (mismo que antes) ===
+    function showBasicoMessage() {
+      alert(`Si tu negocio todavía no tiene presencia online, el Servicio Básico de NEXO-Art es tu puerta de entrada al mundo digital. Te entregamos una landing page 100% estática, con diseño premium responsive que se adapta a cualquier dispositivo y un formulario de captura inteligente para que cada visita se convierta en un contacto real. Es rápido, seguro y sin complicaciones: en pocos días tendrás una página profesional que transmite confianza y empieza a generar clientes. Con NEXO-Art, tu negocio deja de estar invisible y comienza a crecer desde el primer clic.`);
+    }
+    function showAvanzadoMessage() {
+      alert(`Tu negocio necesita más que una página web: necesita una landing optimizada para convertir. Con nuestro Servicio Avanzado, te entregamos una landing con animaciones premium que captan la atención al instante y un CRM automático que organiza y clasifica cada contacto sin que tengas que mover un dedo. Además, tu página está diseñada con enfoque CRO, garantizando velocidad extrema y resultados medibles. En NEXO-Art no solo diseñamos, construimos embudos de ventas inteligentes que trabajan para vos las 24 horas. Elige el Servicio Avanzado y transforma cada visita en una oportunidad real de negocio.`);
+    }
+    function showPremiumMessage() {
+      alert(`Tu negocio no necesita una simple página web, necesita una herramienta digital completa que trabaje para vos las 24 horas. Con nuestro Servicio Premium, diseñamos una web full custom, hecha a medida para tu marca, optimizada con SEO técnico avanzado para que aparezcas en Google y atraigas clientes sin depender de publicidad paga. Además, te damos mantenimiento mensual, asegurando que tu sitio esté siempre actualizado, seguro y funcionando al máximo. En NEXO-Art no vendemos páginas, vendemos resultados reales: más visibilidad, más confianza, más ventas.`);
+    }
+  </script>
+</body>
+</html>
