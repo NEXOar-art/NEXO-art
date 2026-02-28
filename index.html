@@ -35,21 +35,21 @@
 <body class="antialiased selection:bg-primary selection:text-black">
 
   <!-- MODAL DE WHATSAPP -->
-  <div id="whatsappModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-6">
-    <div class="glass p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown">
-      <h3 class="text-4xl font-black mb-6 text-center">¡Último paso!</h3>
-      <p class="text-center text-xl mb-8">Te redirigimos a WhatsApp con tu propuesta personalizada</p>
+  <div id="whatsappModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-6">
+    <div class="glass p-6 sm:p-8 md:p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown">
+      <h3 class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6 text-center">¡Último paso!</h3>
+      <p class="text-center text-lg sm:text-xl mb-6 sm:mb-8">Te redirigimos a WhatsApp con tu propuesta personalizada</p>
 
-      <input type="text" id="modalNombre" placeholder="Tu nombre" class="w-full px-6 py-5 glass border border-white/20 rounded-2xl mb-4 focus:border-primary focus:outline-none" required>
-      <input type="email" id="modalEmail" placeholder="Email (opcional)" class="w-full px-6 py-5 glass border border-white/20 rounded-2xl mb-8 focus:border-primary focus:outline-none">
+      <input type="text" id="modalNombre" placeholder="Tu nombre" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl mb-3 sm:mb-4 focus:border-primary focus:outline-none text-base" required>
+      <input type="email" id="modalEmail" placeholder="Email (opcional)" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl mb-6 sm:mb-8 focus:border-primary focus:outline-none text-base">
 
       <input type="hidden" id="modalPlan">
 
-      <div class="flex gap-4">
-        <button onclick="cerrarModal()" class="flex-1 py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <button onclick="cerrarModal()" class="w-full sm:flex-1 py-4 sm:py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition text-base sm:text-lg">
           Cancelar
         </button>
-        <button onclick="enviarWhatsApp()" class="flex-1 py-5 bg-gradient-to-r from-green-500 to-emerald-500 text-black font-black text-xl rounded-2xl hover:scale-105 transition shadow-xl">
+        <button onclick="enviarWhatsApp()" class="w-full sm:flex-1 py-4 sm:py-5 bg-gradient-to-r from-green-500 to-emerald-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl">
           Enviar por WhatsApp
         </button>
       </div>
@@ -59,83 +59,83 @@
   <div id="particles-js"></div>
 
   <!-- HERO -->
-  <section class="relative min-h-screen flex items-center justify-center px-6 pt-20">
+  <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25">
       <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4" type="video/mp4">
     </video>
     <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-dark/95 to-black"></div>
 
-    <div class="relative z-10 text-center max-w-7xl mx-auto">
-      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black leading-tight mb-10">
+    <div class="relative z-10 text-center max-w-7xl mx-auto px-2">
+      <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-tight sm:leading-none mb-6 sm:mb-10">
         TU LANDING<br><span class="gradient-text">FACTURA SOLA</span>
       </h1>
-      <p class="text-2xl md:text-4xl font-bold text-gray-200 mb-12">
+      <p class="text-lg sm:text-2xl md:text-4xl font-bold text-gray-200 mb-8 sm:mb-12 px-2">
         100% estática • carga en menos de 0.8s • Clasifica tus leads automáticamente
       </p>
-      <button onclick="abrirModal('Básico')" class="px-16 py-8 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-2xl rounded-3xl hover:scale-105 transform transition shadow-2xl">
+      <button onclick="abrirModal('Básico')" class="px-8 sm:px-16 py-6 sm:py-8 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-xl sm:text-2xl rounded-3xl hover:scale-105 transform transition shadow-2xl w-full sm:w-auto">
         EMPEZAR YA
       </button>
     </div>
   </section>
 
   <!-- MENSAJE ESTÁTICO -->
-  <section class="py-16 bg-black/50 backdrop-blur-xl text-center">
-    <p class="text-2xl md:text-3xl font-black text-primary mb-4">
+  <section class="py-12 sm:py-16 bg-black/50 backdrop-blur-xl text-center px-4">
+    <p class="text-xl sm:text-2xl md:text-3xl font-black text-primary mb-3 sm:mb-4">
       Todas nuestras webs son 100% estáticas (HTML + CSS + JS)
     </p>
-    <p class="text-xl text-gray-300">
+    <p class="text-base sm:text-xl text-gray-300 leading-relaxed">
       Carga instantánea • Puntaje 100/100 Google • Nunca se cae • Sin hosting caro
     </p>
   </section>
 
   <!-- PLANES CON BOTONES A WHATSAPP -->
-  <section class="py-32 px-6 max-w-7xl mx-auto">
-    <h2 class="text-6xl md:text-8xl font-black text-center mb-20">ELIGÍ TU RESULTADO</h2>
-    <div class="grid md:grid-cols-3 gap-12">
+  <section class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
+    <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2">ELIGÍ TU RESULTADO</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
 
       <!-- BÁSICO -->
-      <div class="glass p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center">
-        <h3 class="text-4xl font-black mb-4">Básico</h3>
-        <div class="text-6xl font-black mb-8">$88.000</div>
-        <ul class="text-left space-y-5 text-gray-300 text-lg mb-10">
-          <li>Landing 100% estática</li>
-          <li>Diseño premium responsive</li>
-          <li>Formulario de captura</li>
-          <li>Entrega en 5–7 días</li>
+      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col">
+        <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Básico</h3>
+        <div class="text-4xl sm:text-6xl font-black mb-6 sm:mb-8">$88.000</div>
+        <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
+          <li class="leading-relaxed">Landing 100% estática</li>
+          <li class="leading-relaxed">Diseño premium responsive</li>
+          <li class="leading-relaxed">Formulario de captura</li>
+          <li class="leading-relaxed">Entrega en 5–7 días</li>
         </ul>
-        <button onclick="abrirModal('Básico')" class="w-full py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-xl rounded-2xl hover:scale-105 transition shadow-xl">
+        <button onclick="abrirModal('Básico')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl mt-auto">
           EMPEZAR YA
         </button>
       </div>
 
       <!-- AVANZADO -->
-      <div class="glass p-12 rounded-3xl border-4 border-primary shadow-2xl shadow-primary/60 transform scale-110 relative overflow-hidden">
-        <div class="absolute top-4 right-4 bg-gradient-to-r from-primary to-cyan-400 text-black px-8 py-3 rounded-full font-black text-lg">MÁS VENDIDO</div>
-        <h3 class="text-5xl font-black mb-6">Avanzado</h3>
-        <div class="text-7xl font-black text-primary mb-8">$160.000</div>
-        <ul class="text-left space-y-5 text-gray-200 text-lg mb-12">
-          <li>Todo lo del Básico</li>
-          <li>Animaciones premium</li>
-          <li>CRM automático</li>
-          <li>Diagnóstico mensual</li>
+      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border-4 border-primary shadow-2xl shadow-primary/60 transform md:scale-110 relative overflow-hidden flex flex-col">
+        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-primary to-cyan-400 text-black px-4 sm:px-8 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap">MÁS VENDIDO</div>
+        <h3 class="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 mt-2 sm:mt-0">Avanzado</h3>
+        <div class="text-5xl sm:text-7xl font-black text-primary mb-6 sm:mb-8">$160.000</div>
+        <ul class="text-left space-y-3 sm:space-y-5 text-gray-200 text-base sm:text-lg mb-8 sm:mb-12 flex-grow">
+          <li class="leading-relaxed">Todo lo del Básico</li>
+          <li class="leading-relaxed">Animaciones premium</li>
+          <li class="leading-relaxed">CRM automático</li>
+          <li class="leading-relaxed">Diagnóstico mensual</li>
         </ul>
-        <button onclick="abrirModal('Avanzado')" class="w-full py-7 bg-primary text-black font-black text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl">
+        <button onclick="abrirModal('Avanzado')" class="w-full py-5 sm:py-7 bg-primary text-black font-black text-xl sm:text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl mt-auto">
           RESERVAR MI AVANZADO
         </button>
       </div>
 
       <!-- PREMIUM -->
-      <div class="glass p-12 rounded-3xl border border-secondary/50 hover:border-secondary transition text-center">
-        <h3 class="text-4xl font-black mb-4">Premium</h3>
-        <div class="text-6xl font-black text-secondary mb-8">$180.000</div>
-        <ul class="text-left space-y-5 text-gray-300 text-lg mb-10">
-          <li>Todo lo del Avanzado</li>
-          <li>Web completa full custom</li>
-          <li>SEO técnico avanzado</li>
-          <li>Mantenimiento mensual</li>
-          <li>Estrategia 1 a 1</li>
+      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-secondary/50 hover:border-secondary transition text-center flex flex-col">
+        <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Premium</h3>
+        <div class="text-4xl sm:text-6xl font-black text-secondary mb-6 sm:mb-8">$180.000</div>
+        <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
+          <li class="leading-relaxed">Todo lo del Avanzado</li>
+          <li class="leading-relaxed">Web completa full custom</li>
+          <li class="leading-relaxed">SEO técnico avanzado</li>
+          <li class="leading-relaxed">Mantenimiento mensual</li>
+          <li class="leading-relaxed">Estrategia 1 a 1</li>
         </ul>
-        <button onclick="abrirModal('Premium')" class="w-full py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-xl rounded-2xl hover:scale-105 transition">
+        <button onclick="abrirModal('Premium')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition mt-auto">
           DOMINAR MI MERCADO
         </button>
       </div>
@@ -200,8 +200,8 @@
     }
   </script>
 </body>
-
 </html>
+
 
 
 
