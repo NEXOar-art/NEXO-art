@@ -6,10 +6,10 @@
   <meta name="description" content="Landings 100% estáticas que facturan solas • Básico $85k • Avanzado $160k • Premium $240k"/>
   <title>NEXOar-Art | Landing que Convierte Sola</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com  ">
+  <link href="https://fonts.googleapis.com/css2?family=Inter  :wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com  "></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js  "></script>
 
   <script>
     tailwind.config = {
@@ -61,7 +61,7 @@
   <!-- HERO -->
   <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25">
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4" type="video/mp4">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4  " type="video/mp4">
     </video>
     <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-dark/95 to-black"></div>
 
@@ -94,14 +94,15 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
 
       <!-- BÁSICO -->
-      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col">
+      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col relative">
+        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap z-10">20% OFF</div>
         <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Básico</h3>
         <div class="text-4xl sm:text-6xl font-black mb-6 sm:mb-8">$88.000</div>
         <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
           <li class="leading-relaxed">Landing 100% estática</li>
           <li class="leading-relaxed">Diseño premium responsive</li>
           <li class="leading-relaxed">Formulario de captura</li>
-          <li class="leading-relaxed">Entrega en 5–7 días</li>
+          <li class="leading-relaxed">Entrega en 24HS</li>
         </ul>
         <button onclick="abrirModal('Básico')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl mt-auto">
           EMPEZAR YA
@@ -118,6 +119,7 @@
           <li class="leading-relaxed">Animaciones premium</li>
           <li class="leading-relaxed">CRM automático</li>
           <li class="leading-relaxed">Diagnóstico mensual</li>
+          <li class="leading-relaxed">Entrega en 24HS</li>
         </ul>
         <button onclick="abrirModal('Avanzado')" class="w-full py-5 sm:py-7 bg-primary text-black font-black text-xl sm:text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl mt-auto">
           RESERVAR MI AVANZADO
@@ -134,6 +136,7 @@
           <li class="leading-relaxed">SEO técnico avanzado</li>
           <li class="leading-relaxed">Mantenimiento mensual</li>
           <li class="leading-relaxed">Estrategia 1 a 1</li>
+          <li class="leading-relaxed">Entrega en 24HS</li>
         </ul>
         <button onclick="abrirModal('Premium')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition mt-auto">
           DOMINAR MI MERCADO
@@ -178,7 +181,7 @@
       if (email) mensaje += " Mi email es: " + email;
 
       const textoFinal = encodeURIComponent(mensaje);
-      window.open(`https://api.whatsapp.com/send?phone=+543489686939&text=${textoFinal}`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=+543489686939&text=  ${textoFinal}`, '_blank');
 
       // Opcional: guardar en tu CRM
       // fetch(CRM_WEBHOOK, {method:"POST", mode:"no-cors", body:JSON.stringify({nombre, plan, email, origen:"Botón directo"})});
@@ -202,6 +205,7 @@
   </script>
 </body>
 </html>
+
 
 
 
