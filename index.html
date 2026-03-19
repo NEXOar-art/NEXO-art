@@ -6,10 +6,10 @@
   <meta name="description" content="Landings 100% estáticas que facturan solas • Básico $85k • Avanzado $160k • Premium $240k"/>
   <title>NEXOar-Art | Landing que Convierte Sola</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com  ">
-  <link href="https://fonts.googleapis.com/css2?family=Inter  :wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com  "></script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js  "></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -61,7 +61,7 @@
   <!-- HERO -->
   <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25">
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4  " type="video/mp4">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4" type="video/mp4">
     </video>
     <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-dark/95 to-black"></div>
 
@@ -145,6 +145,42 @@
     </div>
   </section>
 
+  <!-- ✨ NUEVA SECCIÓN: TRABAJOS REALIZADOS ✨ -->
+  <section class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
+    <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2 gradient-text">TRABAJOS REALIZADOS</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
+      
+      <!-- MECANICA LEON -->
+      <a href="https://nexoar-art.github.io/MECANICA-LEON/" target="_blank" class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">MECANICA LEON</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Landing page para taller mecánico • Diseño responsive • Captura de leads</p>
+        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
+          VER PROYECTO →
+        </span>
+      </a>
+
+      <!-- PEKA AUTOPARTS -->
+      <a href="https://nexoar-art.github.io/PEKA-AUTOPART/" target="_blank" class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">PEKA AUTOPARTS</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">E-commerce estático para autopartes • Catálogo interactivo • Optimizado para móviles</p>
+        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
+          VER PROYECTO →
+        </span>
+      </a>
+
+      <!-- ARGENTPLAY -->
+      <a href="https://nexoar-art.github.io/ArgenPlay/" target="_blank" class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">ARGENTPLAY</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Plataforma de gaming • Animaciones premium • Experiencia inmersiva</p>
+        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
+          VER PROYECTO →
+        </span>
+      </a>
+
+    </div>
+  </section>
+  <!-- ✨ FIN SECCIÓN TRABAJOS ✨ -->
+
   <!-- SCRIPT COMPLETO -->
   <script>
     // === ABRIR MODAL CON PLAN PRESELECCIONADO ===
@@ -181,7 +217,7 @@
       if (email) mensaje += " Mi email es: " + email;
 
       const textoFinal = encodeURIComponent(mensaje);
-      window.open(`https://api.whatsapp.com/send?phone=+543489686939&text=  ${textoFinal}`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=+543489686939&text=${textoFinal}`, '_blank');
 
       // Opcional: guardar en tu CRM
       // fetch(CRM_WEBHOOK, {method:"POST", mode:"no-cors", body:JSON.stringify({nombre, plan, email, origen:"Botón directo"})});
@@ -205,7 +241,6 @@
   </script>
 </body>
 </html>
-
 
 
 
