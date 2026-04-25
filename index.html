@@ -16,85 +16,286 @@
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
-          colors: { primary: '#00F0FF', secondary: '#FF00FF', accent: '#39FF14' },
-          animation: { slideDown: 'slideDown 0.6s ease-out', pulseBtn: 'pulse 2s infinite' },
-          keyframes: { slideDown: { '0%': { opacity:0, transform:'translateY(-50px)' }, '100%': { opacity:1, transform:'translateY(0)' } } }
+          colors: { 
+            primary: '#00F0FF', 
+            secondary: '#FF00FF', 
+            accent: '#39FF14',
+            dark: '#0a0a1a'
+          },
+          animation: { 
+            slideDown: 'slideDown 0.6s ease-out', 
+            pulseBtn: 'pulse 2s infinite',
+            float: 'float 3s ease-in-out infinite'
+          },
+          keyframes: { 
+            slideDown: { 
+              '0%': { opacity:0, transform:'translateY(-50px)' }, 
+              '100%': { opacity:1, transform:'translateY(0)' } 
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          }
         }
       }
     }
   </script>
 
   <style>
-    body { background:#050511; color:white; overflow-x:hidden; }
-    .glass { background:rgba(255,255,255,0.06); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.12); }
-    .gradient-text { background:linear-gradient(90deg,#00F0FF,#FF00FF,#39FF14,#00F0FF); background-size:400%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:gradient 6s ease infinite; }
-    @keyframes gradient { 0%{background-position:0% 50%}100%{background-position:100% 50%}}
-    #particles-js { position:fixed; inset:0; z-index:1; pointer-events:none; }
+    /* === ESTILOS BASE === */
+    body { 
+      background:#050511; 
+      color:white; 
+      overflow-x:hidden; 
+      font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    }
+    
+    /* === GLASSMORPHISM === */
+    .glass { 
+      background:rgba(255,255,255,0.06); 
+      backdrop-filter:blur(20px); 
+      border:1px solid rgba(255,255,255,0.12); 
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    
+    /* === TEXTO GRADIENTE ANIMADO === */
+    .gradient-text { 
+      background:linear-gradient(90deg,#00F0FF,#FF00FF,#39FF14,#00F0FF); 
+      background-size:400%; 
+      -webkit-background-clip:text; 
+      -webkit-text-fill-color:transparent; 
+      background-clip:text;
+      animation:gradient 6s ease infinite; 
+    }
+    @keyframes gradient { 
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    
+    /* === PARTÍCULAS DE FONDO === */
+    #particles-js { 
+      position:fixed; 
+      inset:0; 
+      z-index:1; 
+      pointer-events:none; 
+    }
+    
+    /* === SELECTOR DE PAÍSES === */
+    .country-select {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(0,240,255,0.4);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300F0FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      padding-right: 36px;
+      font-size: 0.875rem;
+    }
+    .country-select:hover, .country-select:focus {
+      border-color: #00F0FF;
+      box-shadow: 0 0 20px rgba(0,240,255,0.3);
+      outline: none;
+      background-color: rgba(0,240,255,0.1);
+    }
+    .country-select option {
+      background: #050511;
+      color: white;
+      padding: 8px;
+    }
+    
+    /* === ANIMACIÓN DE CAMBIO DE PRECIO === */
+    .price-badge {
+      transition: all 0.3s ease;
+    }
+    .price-change {
+      animation: pricePulse 0.4s ease;
+    }
+    @keyframes pricePulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.9; color: #00F0FF; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    /* === HOVER EFFECTS PARA TARJETAS === */
+    .plan-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .plan-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,240,255,0.2);
+    }
+    
+    /* === BOTONES CON EFECTO GLOW === */
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    .btn-glow:hover::before {
+      left: 100%;
+    }
+    
+    /* === SCROLLBAR PERSONALIZADO === */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050511;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #00F0FF, #FF00FF);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #FF00FF, #00F0FF);
+    }
+    
+    /* === UTILIDADES === */
+    .text-shadow {
+      text-shadow: 0 0 20px rgba(0,240,255,0.5);
+    }
+    .border-glow {
+      box-shadow: 0 0 20px rgba(0,240,255,0.3);
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-primary selection:text-black">
 
   <!-- ✨ BARRA DE MARCA NEXO-ART - INTELIGENCIA QUE CONVIERTE ✨ -->
-  <div class="fixed top-0 left-0 right-0 z-40 py-3 px-4 text-center glass border-b border-white/10">
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+  <header class="fixed top-0 left-0 right-0 z-40 py-3 px-4 text-center glass border-b border-white/10">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
       <span class="text-primary font-mono font-black text-lg tracking-wider">NEXO-ART</span>
       <span class="text-gray-500 text-xs sm:text-sm hidden sm:inline">•</span>
       <span class="text-gray-300 text-xs sm:text-sm font-medium">Inteligencia que convierte visitantes en clientes</span>
-    </div>
-  </div>
-
-  <!-- MODAL DE WHATSAPP -->
-  <div id="whatsappModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-6">
-    <div class="glass p-6 sm:p-8 md:p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown">
-      <h3 class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6 text-center">¡Último paso!</h3>
-      <p class="text-center text-lg sm:text-xl mb-6 sm:mb-8">Te redirigimos a WhatsApp con tu propuesta personalizada</p>
-
-      <input type="text" id="modalNombre" placeholder="Tu nombre" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl mb-3 sm:mb-4 focus:border-primary focus:outline-none text-base" required>
-      <input type="email" id="modalEmail" placeholder="Email (opcional)" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl mb-6 sm:mb-8 focus:border-primary focus:outline-none text-base">
-
-      <input type="hidden" id="modalPlan">
-
-      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-        <button onclick="cerrarModal()" class="w-full sm:flex-1 py-4 sm:py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition text-base sm:text-lg">
-          Cancelar
-        </button>
-        <button onclick="enviarWhatsApp()" class="w-full sm:flex-1 py-4 sm:py-5 bg-gradient-to-r from-green-500 to-emerald-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl">
-          Enviar por WhatsApp
-        </button>
+      
+      <!-- 🌍 SELECTOR DE PAÍSES -->
+      <div class="flex items-center gap-2 mt-2 sm:mt-0 sm:ml-4">
+        <span class="text-gray-400 text-xs">🌎</span>
+        <select id="countrySelector" class="country-select text-sm" onchange="cambiarPais()" aria-label="Seleccionar país">
+          <option value="argentina">🇦🇷 Argentina</option>
+          <option value="chile">🇨🇱 Chile</option>
+          <option value="uruguay">🇺🇾 Uruguay</option>
+        </select>
       </div>
     </div>
+  </header>
+
+  <!-- 📱 MODAL DE WHATSAPP -->
+  <div id="whatsappModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="glass p-6 sm:p-8 md:p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown">
+      <h3 id="modalTitle" class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6 text-center gradient-text">¡Último paso!</h3>
+      <p class="text-center text-lg sm:text-xl mb-6 sm:mb-8 text-gray-200">Te redirigimos a WhatsApp con tu propuesta personalizada</p>
+
+      <form id="whatsappForm" onsubmit="enviarWhatsApp(); return false;" class="space-y-4">
+        <input type="text" id="modalNombre" placeholder="Tu nombre *" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" required aria-required="true">
+        <input type="email" id="modalEmail" placeholder="Email (opcional)" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" aria-label="Email opcional">
+        <input type="hidden" id="modalPlan">
+        <input type="hidden" id="modalPais" value="argentina">
+
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+          <button type="button" onclick="cerrarModal()" class="w-full sm:flex-1 py-4 sm:py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary/50">
+            Cancelar
+          </button>
+          <button type="submit" class="w-full sm:flex-1 py-4 sm:py-5 bg-gradient-to-r from-green-500 to-emerald-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl focus:outline-none focus:ring-2 focus:ring-green-400">
+            Enviar por WhatsApp 🚀
+          </button>
+        </div>
+      </form>
+      
+      <p class="text-xs text-gray-500 text-center mt-6">
+        🔒 Tus datos están seguros • Respuesta en minutos
+      </p>
+    </div>
   </div>
 
+  <!-- 🎨 FONDO DE PARTÍCULAS -->
   <div id="particles-js"></div>
 
-  <!-- HERO -->
+  <!-- 🌟 SECCIÓN HERO -->
   <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25">
       <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4" type="video/mp4">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-medium.mp4" type="video/mp4">
     </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-dark/95 to-black"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-[#050511]/95 to-[#050511]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,240,255,0.1)_0%,_transparent_70%)]"></div>
 
     <div class="relative z-10 text-center max-w-7xl mx-auto px-2">
-      <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-tight sm:leading-none mb-6 sm:mb-10">
+      <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full mb-6 sm:mb-8 animate-float">
+        <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+        <span class="text-sm text-gray-300">✨ Landings que facturan 24/7</span>
+      </div>
+      
+      <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-tight sm:leading-none mb-6 sm:mb-10 text-shadow">
         TU LANDING<br><span class="gradient-text">FACTURA SOLA</span>
       </h1>
-      <p class="text-lg sm:text-2xl md:text-4xl font-bold text-gray-200 mb-8 sm:mb-12 px-2">
+      
+      <p class="text-lg sm:text-2xl md:text-4xl font-bold text-gray-200 mb-8 sm:mb-12 px-2 max-w-4xl mx-auto">
         100% estática • carga en menos de 0.8s • Clasifica tus leads automáticamente
       </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <button onclick="abrirModal('Avanzado')" class="px-8 sm:px-12 py-4 sm:py-5 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-2xl btn-glow">
+          EMPEZAR AHORA →
+        </button>
+        <a href="#planes" class="px-8 sm:px-12 py-4 sm:py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition text-lg sm:text-xl">
+          Ver Planes ↓
+        </a>
+      </div>
+      
+      <div class="mt-12 sm:mt-16 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+        <div class="flex items-center gap-2">
+          <span class="text-accent">✓</span>
+          <span>Sin mensualidades</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-accent">✓</span>
+          <span>Entrega en 24HS</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-accent">✓</span>
+          <span>Soporte incluido</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
     </div>
   </section>
 
-  <!-- MENSAJE ESTÁTICO -->
-  <section class="py-12 sm:py-16 bg-black/50 backdrop-blur-xl text-center px-4">
+  <!-- 💡 MENSAJE ESTÁTICO -->
+  <section class="py-12 sm:py-16 bg-black/50 backdrop-blur-xl text-center px-4 border-y border-white/5">
     <p class="text-xl sm:text-2xl md:text-3xl font-black text-primary mb-3 sm:mb-4">
       Todas nuestras webs son 100% estáticas (HTML + CSS + JS)
     </p>
-    <p class="text-base sm:text-xl text-gray-300 leading-relaxed">
-      Carga instantánea • Puntaje 100/100 Google • Nunca se cae • Sin hosting caro
+    <p class="text-base sm:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+      Carga instantánea • Puntaje 100/100 Google • Nunca se cae • Sin hosting caro • SEO optimizado
     </p>
   </section>
 
-  <!-- ✨ VIDEO EXPLICATIVO EMBEBIDO DE LA PLATAFORMA NEXO-ART ✨ -->
+  <!-- 🎬 VIDEO EXPLICATIVO EMBEBIDO -->
   <section class="py-16 sm:py-24 px-4 sm:px-6 bg-gradient-to-b from-black/30 to-black/50">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 gradient-text">
@@ -104,99 +305,167 @@
         Mirá nuestro video explicativo directamente aquí y descubrí cómo nuestras landings pueden transformar tu negocio y empezar a facturar automáticamente.
       </p>
       
-      <!-- ✨ VIDEO DE YOUTUBE EMBEBIDO ✨ -->
+      <!-- VIDEO DE YOUTUBE -->
       <div class="relative w-full max-w-4xl mx-auto aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 border border-white/10 glass">
         <iframe 
           src="https://www.youtube.com/embed/1tHb9OWXvAI?rel=0&modestbranding=1&playsinline=1" 
-          title="Video explicativo NEXO-ART"
+          title="Video explicativo NEXO-ART: Landings que convierten"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowfullscreen
           class="absolute inset-0 w-full h-full"
-          loading="lazy">
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin">
         </iframe>
       </div>
       
-      <p class="text-sm text-gray-500 mt-6 flex items-center justify-center gap-2">
+      <p class="text-sm text-gray-500 mt-6 flex items-center justify-center gap-2 flex-wrap">
         <span>⏱️</span>
         <span>Duración: 3-5 minutos</span>
-        <span class="mx-2">•</span>
+        <span class="mx-2 hidden sm:inline">•</span>
         <span>🔊</span>
         <span>Activá el sonido para mejor experiencia</span>
+        <span class="mx-2 hidden sm:inline">•</span>
+        <span>📱</span>
+        <span>Compatible con móvil y desktop</span>
       </p>
     </div>
   </section>
-  <!-- ✨ FIN VIDEO EXPLICATIVO ✨ -->
 
-  <!-- PLANES CON BOTONES A WHATSAPP -->
-  <section class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
-    <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2">ELIGÍ TU RESULTADO</h2>
+  <!-- 💰 PLANES CON PRECIOS DINÁMICOS -->
+  <section id="planes" class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
+    <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2 gradient-text">ELIGÍ TU RESULTADO</h2>
+    
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
 
-      <!-- BÁSICO -->
-      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col relative">
-        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap z-10">10% OFF</div>
+      <!-- ===== PLAN BÁSICO ===== -->
+      <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col relative">
+        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap z-10 shadow-lg">10% OFF</div>
+        
         <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Básico</h3>
-        <div class="text-4xl sm:text-6xl font-black mb-6 sm:mb-8">$88.000</div>
+        <div id="price-basico" class="text-4xl sm:text-6xl font-black mb-6 sm:mb-8 price-badge text-shadow">$88.000</div>
+        
         <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
-          <li class="leading-relaxed">Landing 100% estática</li>
-          <li class="leading-relaxed">Diseño premium responsive</li>
-          <li class="leading-relaxed">Formulario de captura</li>
-          <li class="leading-relaxed">Entrega en 24HS</li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-accent mt-1">✓</span>
+            <span>Landing 100% estática</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-accent mt-1">✓</span>
+            <span>Diseño premium responsive</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-accent mt-1">✓</span>
+            <span>Formulario de captura</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-accent mt-1">✓</span>
+            <span>Entrega en 24HS</span>
+          </li>
         </ul>
         
-        <!-- ✨ BOTÓN DE CRÉDITO - PLAN BÁSICO ✨ -->
-        <button onclick="mostrarInfoCredito()" class="w-full mb-3 sm:mb-4 py-2 sm:py-3 glass border border-accent/40 text-accent font-bold text-sm sm:text-base rounded-xl hover:bg-accent/10 transition flex items-center justify-center gap-2">
+        <!-- BOTÓN DE CRÉDITO (Solo Argentina) -->
+        <button id="btn-credito-basico" onclick="mostrarInfoCredito()" class="w-full mb-3 sm:mb-4 py-2 sm:py-3 glass border border-accent/40 text-accent font-bold text-sm sm:text-base rounded-xl hover:bg-accent/10 transition flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-accent/50">
           <span>💳</span> Pagar en 2 cuotas de $48.000
         </button>
         
-        <button onclick="abrirModal('Básico')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl mt-auto">
+        <button onclick="abrirModal('Básico')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-cyan-400">
           EMPEZAR YA
         </button>
-      </div>
+      </article>
 
-      <!-- AVANZADO -->
-      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border-4 border-primary shadow-2xl shadow-primary/60 transform md:scale-110 relative overflow-hidden flex flex-col">
-        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-primary to-cyan-400 text-black px-4 sm:px-8 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap">MÁS VENDIDO</div>
+      <!-- ===== PLAN AVANZADO (DESTACADO) ===== -->
+      <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border-4 border-primary shadow-2xl shadow-primary/60 transform md:scale-110 relative overflow-hidden flex flex-col">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
+        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-primary to-cyan-400 text-black px-4 sm:px-8 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap shadow-lg z-10">🔥 MÁS VENDIDO</div>
+        
         <h3 class="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 mt-2 sm:mt-0">Avanzado</h3>
-        <div class="text-5xl sm:text-7xl font-black text-primary mb-6 sm:mb-8">$160.000</div>
+        <div id="price-avanzado" class="text-5xl sm:text-7xl font-black text-primary mb-6 sm:mb-8 price-badge text-shadow">$160.000</div>
+        
         <ul class="text-left space-y-3 sm:space-y-5 text-gray-200 text-base sm:text-lg mb-8 sm:mb-12 flex-grow">
-          <li class="leading-relaxed">Todo lo del Básico</li>
-          <li class="leading-relaxed">Animaciones premium</li>
-          <li class="leading-relaxed">CRM automático</li>
-          <li class="leading-relaxed">Diagnóstico mensual</li>
-          <li class="leading-relaxed">Entrega en 24HS</li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-primary mt-1">✓</span>
+            <span>Todo lo del Básico</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-primary mt-1">✓</span>
+            <span>Animaciones premium</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-primary mt-1">✓</span>
+            <span>CRM automático</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-primary mt-1">✓</span>
+            <span>Diagnóstico mensual</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-primary mt-1">✓</span>
+            <span>Entrega en 24HS</span>
+          </li>
         </ul>
-        <button onclick="abrirModal('Avanzado')" class="w-full py-5 sm:py-7 bg-primary text-black font-black text-xl sm:text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl mt-auto">
+        
+        <button onclick="abrirModal('Avanzado')" class="w-full py-5 sm:py-7 bg-primary text-black font-black text-xl sm:text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-primary">
           RESERVAR MI AVANZADO
         </button>
-      </div>
+      </article>
 
-      <!-- PREMIUM -->
-      <div class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-secondary/50 hover:border-secondary transition text-center flex flex-col">
+      <!-- ===== PLAN PREMIUM ===== -->
+      <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-secondary/50 hover:border-secondary transition text-center flex flex-col">
         <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Premium</h3>
-        <div class="text-4xl sm:text-6xl font-black text-secondary mb-6 sm:mb-8">$180.000</div>
+        <div id="price-premium" class="text-4xl sm:text-6xl font-black text-secondary mb-6 sm:mb-8 price-badge text-shadow">$180.000</div>
+        
         <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
-          <li class="leading-relaxed">Todo lo del Avanzado</li>
-          <li class="leading-relaxed">Web completa full custom</li>
-          <li class="leading-relaxed">SEO técnico avanzado</li>
-          <li class="leading-relaxed">Mantenimiento mensual</li>
-          <li class="leading-relaxed">Estrategia 1 a 1</li>
-          <li class="leading-relaxed">Entrega en 24HS</li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>Todo lo del Avanzado</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>Web completa full custom</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>SEO técnico avanzado</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>Mantenimiento mensual</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>Estrategia 1 a 1</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>Entrega en 24HS</span>
+          </li>
         </ul>
-        <button onclick="abrirModal('Premium')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition mt-auto">
+        
+        <button onclick="abrirModal('Premium')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-secondary">
           DOMINAR MI MERCADO
         </button>
-      </div>
+      </article>
     </div>
+    
+    <!-- Nota de precios -->
+    <p class="text-center text-gray-500 text-sm mt-12 max-w-2xl mx-auto">
+      💡 <strong>Nota:</strong> Los precios en USD para Chile y Uruguay se pagan vía transferencia internacional, PayPal o criptomonedas. 
+      Argentina: precios en pesos con opción de crédito para plan Básico.
+    </p>
   </section>
 
-  <!-- ✨ NUEVA SECCIÓN: TRABAJOS REALIZADOS ✨ -->
+  <!-- 🎨 SECCIÓN: TRABAJOS REALIZADOS -->
   <section class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
     <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2 gradient-text">TRABAJOS REALIZADOS</h2>
+    
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
       
-      <!-- MECANICA LEON -->
-      <a href="https://nexoar-art.github.io/MECANICA-LEON/" target="_blank" class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+      <!-- PROYECTO 1: MECANICA LEON -->
+      <a href="https://nexoar-art.github.io/MECANICA-LEON/" target="_blank" rel="noopener noreferrer" 
+         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+          <span class="text-4xl">🔧</span>
+        </div>
         <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">MECANICA LEON</h3>
         <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Landing page para taller mecánico • Diseño responsive • Captura de leads</p>
         <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
@@ -204,8 +473,12 @@
         </span>
       </a>
 
-      <!-- PEKA AUTOPARTS -->
-      <a href="https://nexoar-art.github.io/PEKA-AUTOPART/" target="_blank" class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+      <!-- PROYECTO 2: PEKA AUTOPARTS -->
+      <a href="https://nexoar-art.github.io/PEKA-AUTOPART/" target="_blank" rel="noopener noreferrer" 
+         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+          <span class="text-4xl">🚗</span>
+        </div>
         <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">PEKA AUTOPARTS</h3>
         <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">E-commerce estático para autopartes • Catálogo interactivo • Optimizado para móviles</p>
         <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
@@ -213,35 +486,37 @@
         </span>
       </a>
 
-      <!-- ARGENTPLAY -->
-      <a href="https://nexoar-art.github.io/ArgenPlay/" target="_blank" class="glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+      <!-- PROYECTO 3: ARGENTPLAY -->
+      <a href="https://nexoar-art.github.io/ArgenPlay/" target="_blank" rel="noopener noreferrer" 
+         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+          <span class="text-4xl">🎮</span>
+        </div>
         <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">ARGENTPLAY</h3>
         <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Plataforma de gaming • Animaciones premium • Experiencia inmersiva</p>
         <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
           VER PROYECTO →
         </span>
       </a>
-
     </div>
   </section>
-  <!-- ✨ FIN SECCIÓN TRABAJOS ✨ -->
 
-  <!-- ✨ BOTÓN FINAL "EMPEZAR YA" - CTA PRINCIPAL AL FINAL DE LA PÁGINA ✨ -->
+  <!-- 🚀 CTA FINAL -->
   <section class="py-16 sm:py-24 px-4 sm:px-6 text-center">
     <div class="max-w-4xl mx-auto">
       <h3 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 gradient-text">¿Listo para que tu landing facture sola?</h3>
       <p class="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-10">No esperes más. Tu competencia ya está convirtiendo visitantes en clientes.</p>
-      <button onclick="abrirModal('Avanzado')" class="px-10 sm:px-20 py-6 sm:py-8 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-xl sm:text-2xl rounded-3xl hover:scale-105 transform transition shadow-2xl w-full sm:w-auto animate-pulseBtn">
+      <button onclick="abrirModal('Avanzado')" class="px-10 sm:px-20 py-6 sm:py-8 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-xl sm:text-2xl rounded-3xl hover:scale-105 transform transition shadow-2xl w-full sm:w-auto animate-pulseBtn btn-glow focus:outline-none focus:ring-2 focus:ring-primary">
         EMPEZAR YA →
       </button>
       <p class="text-sm text-gray-500 mt-4">Sin compromiso • Respuesta en minutos • Pago seguro</p>
     </div>
   </section>
 
-  <!-- ✨ BOTONES FLOTANTES DE CONTACTO ✨ -->
+  <!-- 📞 BOTONES FLOTANTES DE CONTACTO -->
   
-  <!-- LinkedIn (CORREGIDO) - Lado derecho -->
-  <a href="https://www.linkedin.com/in/nexo-art-591a64389/" target="_blank" 
+  <!-- LinkedIn - Lado derecho -->
+  <a href="https://www.linkedin.com/in/nexo-art-591a64389/" target="_blank" rel="noopener noreferrer"
      class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#0077B5] hover:bg-[#005885] rounded-full shadow-2xl shadow-[#0077B5]/40 transition-all duration-300 hover:scale-110 group"
      aria-label="Contáctanos por LinkedIn" title="Contáctanos por LinkedIn">
     <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -252,8 +527,8 @@
     </span>
   </a>
 
-  <!-- WhatsApp 1: 3489686939 - Lado derecho (CIRCULAR - MANTENIDO) -->
-  <a href="https://api.whatsapp.com/send?phone=543489686939&text=Hola%20NEXO-Art!%20Quiero%20más%20información%20sobre%20sus%20servicios." target="_blank"
+  <!-- WhatsApp Principal: 3489686939 - Lado derecho -->
+  <a href="https://api.whatsapp.com/send?phone=543489686939&text=Hola%20NEXO-Art!%20Quiero%20más%20información%20sobre%20sus%20servicios." target="_blank" rel="noopener noreferrer"
      class="fixed bottom-24 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] hover:bg-[#128C7E] rounded-full shadow-2xl shadow-[#25D366]/40 transition-all duration-300 hover:scale-110 group"
      aria-label="WhatsApp: 3489686939" title="WhatsApp: 3489686939">
     <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -264,89 +539,317 @@
     </span>
   </a>
 
-  <!-- ✨ WhatsApp EMERGENCIA 3834689137 - ICONO CUADRADO - Lado izquierdo (MANTENIDO) ✨ -->
-  <a href="https://api.whatsapp.com/send?phone=543834689137&text=🚨%20EMERGENCIA%20NEXO-Art:%20Necesito%20asistencia%20inmediata.%20Mi%20nombre%20es:" target="_blank"
+  <!-- WhatsApp EMERGENCIA 3834689137 - Lado izquierdo -->
+  <a href="https://api.whatsapp.com/send?phone=543834689137&text=🚨%20EMERGENCIA%20NEXO-Art:%20Necesito%20asistencia%20inmediata.%20Mi%20nombre%20es:" target="_blank" rel="noopener noreferrer"
      class="fixed bottom-6 left-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] hover:bg-[#128C7E] rounded-xl sm:rounded-2xl shadow-2xl shadow-[#25D366]/40 transition-all duration-300 hover:scale-110 group border-2 border-white/30"
      aria-label="WhatsApp EMERGENCIA: 3834689137" title="WhatsApp EMERGENCIA: 3834689137">
     <div class="relative w-full h-full flex items-center justify-center">
-      <!-- Icono cuadrado de WhatsApp -->
       <svg class="w-8 h-8 sm:w-9 sm:h-9 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
       </svg>
-      <!-- Badge de EMERGENCIA en esquina superior derecha del botón -->
-      <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-sm border border-white/50">!</span>
+      <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-sm border border-white/50 animate-pulse">!</span>
     </div>
     <span class="absolute -top-12 left-1/2 -translate-x-1/2 bg-red-600/95 text-white text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-white/30 shadow-lg">
       🚨 EMERGENCIA: 3834689137
     </span>
   </a>
 
-  <!-- SCRIPT COMPLETO -->
+  <!-- ⚙️ SCRIPT COMPLETO CON TODA LA LÓGICA -->
   <script>
-    // === ABRIR MODAL CON PLAN PRESELECCIONADO ===
+    // ============================================
+    // 🌍 CONFIGURACIÓN DE PRECIOS POR PAÍS
+    // ============================================
+    const preciosPorPais = {
+      argentina: {
+        basico: { precio: "$88.000", credito: "2 cuotas de $48.000", mostrarCredito: true },
+        avanzado: { precio: "$160.000" },
+        premium: { precio: "$180.000" }
+      },
+      chile: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false },
+        avanzado: { precio: "$120 USD" },
+        premium: { precio: "$160 USD" }
+      },
+      uruguay: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false },
+        avanzado: { precio: "$120 USD" },
+        premium: { precio: "$160 USD" }
+      }
+    };
+
+    let paisActual = 'argentina';
+
+    // ============================================
+    // 🔄 FUNCIÓN: CAMBIAR PAÍS Y ACTUALIZAR UI
+    // ============================================
+    function cambiarPais() {
+      const selector = document.getElementById('countrySelector');
+      const nuevoPais = selector.value;
+      
+      // Evitar recarga innecesaria
+      if (nuevoPais === paisActual) return;
+      
+      paisActual = nuevoPais;
+      const precios = preciosPorPais[paisActual];
+      
+      // Animación y actualización de precios
+      ['basico', 'avanzado', 'premium'].forEach(plan => {
+        const el = document.getElementById(`price-${plan}`);
+        if (el) {
+          el.classList.add('price-change');
+          setTimeout(() => {
+            el.textContent = precios[plan].precio;
+            el.classList.remove('price-change');
+          }, 200);
+        }
+      });
+      
+      // Mostrar/ocultar botón de crédito para plan Básico
+      const btnCredito = document.getElementById('btn-credito-basico');
+      if (btnCredito) {
+        if (precios.basico.mostrarCredito) {
+          btnCredito.style.display = 'flex';
+          btnCredito.innerHTML = `<span>💳</span> Pagar en ${precios.basico.credito}`;
+        } else {
+          btnCredito.style.display = 'none';
+        }
+      }
+      
+      // Actualizar campo oculto del modal
+      document.getElementById('modalPais').value = paisActual;
+      
+      // Guardar preferencia en localStorage
+      try {
+        localStorage.setItem('nexoar-pais', paisActual);
+      } catch(e) {
+        console.log('localStorage no disponible');
+      }
+      
+      // Feedback visual al usuario
+      mostrarNotificacion(`🌎 Precios actualizados para ${selector.options[selector.selectedIndex].text}`);
+    }
+
+    // ============================================
+    // 💬 FUNCIÓN: ABRIR MODAL DE WHATSAPP
+    // ============================================
     function abrirModal(plan) {
       document.getElementById('modalPlan').value = plan;
+      document.getElementById('modalPais').value = paisActual;
       document.getElementById('whatsappModal').classList.remove('hidden');
       document.getElementById('modalNombre').focus();
+      
+      // Prevenir scroll del body
+      document.body.style.overflow = 'hidden';
     }
 
+    // ============================================
+    // ❌ FUNCIÓN: CERRAR MODAL
+    // ============================================
     function cerrarModal() {
       document.getElementById('whatsappModal').classList.add('hidden');
+      document.body.style.overflow = '';
+      
+      // Limpiar formulario
+      document.getElementById('whatsappForm').reset();
     }
 
-    // === ENVIAR A WHATSAPP CON MENSAJE PERSUASIVO + EMOJIS ===
+    // ============================================
+    // 📤 FUNCIÓN: ENVIAR A WHATSAPP
+    // ============================================
     function enviarWhatsApp() {
       const nombre = document.getElementById('modalNombre').value.trim();
       const email = document.getElementById('modalEmail').value.trim();
       const plan = document.getElementById('modalPlan').value;
+      const pais = document.getElementById('modalPais').value || paisActual;
 
+      // Validación
       if (!nombre) {
-        alert("Por favor, ingresá tu nombre");
+        alert("⚠️ Por favor, ingresá tu nombre para continuar");
+        document.getElementById('modalNombre').focus();
         return;
       }
 
-      // ✅ PRECIOS ACTUALIZADOS PARA COINCIDIR CON LAS TARJETAS
+      // Mensajes personalizados por plan y país
+      const precios = preciosPorPais[pais];
       const mensajes = {
-        "Básico": "Hola NEXO-Art! Me llamo " + nombre + " y quiero el plan BÁSICO por $88.000. ¡Empecemos ya!",
-        "Avanzado": "Hola NEXO-Art! Soy " + nombre + " y quiero el plan AVANZADO por $160.000. ¡Es el más vendido y necesito que mi landing que facture sola!",
-        "Premium": "Hola NEXO-Art! Mi nombre es " + nombre + " y quiero el plan PREMIUM por $180.000. ¡Quiero dominar mi mercado con una web full custom!"
+        "Básico": `🚀 *Hola NEXO-Art!* Me llamo *${nombre}* y quiero el plan *BÁSICO* por *${precios.basico.precio}*. ¡Empecemos ya!`,
+        "Avanzado": `🚀 *Hola NEXO-Art!* Soy *${nombre}* y quiero el plan *AVANZADO* por *${precios.avanzado.precio}*. ¡Es el más vendido y necesito que mi landing facture sola!`,
+        "Premium": `🚀 *Hola NEXO-Art!* Mi nombre es *${nombre}* y quiero el plan *PREMIUM* por *${precios.premium.precio}*. ¡Quiero dominar mi mercado con una web full custom!`
       };
 
       let mensaje = mensajes[plan] || mensajes["Avanzado"];
-
-      if (email) mensaje += " Mi email es: " + email;
+      if (email) mensaje += `\n📧 Email: ${email}`;
+      mensaje += `\n🌍 País: ${pais.charAt(0).toUpperCase() + pais.slice(1)}`;
 
       const textoFinal = encodeURIComponent(mensaje);
-      window.open(`https://api.whatsapp.com/send?phone=+543489686939&text=${textoFinal}`, '_blank');
-
-      // Opcional: guardar en tu CRM
-      // fetch(CRM_WEBHOOK, {method:"POST", mode:"no-cors", body:JSON.stringify({nombre, plan, email, origen:"Botón directo"})});
-
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=+543489686939&text=${textoFinal}`;
+      
+      // Abrir WhatsApp en nueva pestaña
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      
+      // Cerrar modal y feedback
       cerrarModal();
+      mostrarNotificacion('✅ ¡Mensaje enviado! Te contactaremos en breve');
+      
+      // Opcional: Analytics o CRM
+      // registrarConversion({ plan, pais, nombre, email });
     }
 
-    // === MOSTRAR INFO DE CRÉDITO - PLAN BÁSICO ===
+    // ============================================
+    // 💳 FUNCIÓN: MOSTRAR INFO DE CRÉDITO
+    // ============================================
     function mostrarInfoCredito() {
-      alert("💳 OPCIÓN DE CRÉDITO - PLAN BÁSICO\n\n✅ Adquirí tu landing por $88.000 en:\n\n• 2 cuotas fijas de $48.000 pesos\n• Sin interés adicional\n• Aprobación inmediata\n\n🔹 Primera cuota: al confirmar el proyecto\n🔹 Segunda cuota: a los 15 días\n\n¡Empezá hoy y pagá cómodo! 🚀");
+      const precios = preciosPorPais[paisActual].basico;
+      
+      if (!precios.mostrarCredito) {
+        alert("💳 *Opción de crédito disponible solo para Argentina*\n\nPara Chile y Uruguay, el pago se realiza en USD vía:\n• Transferencia internacional\n• PayPal\n• Criptomonedas (USDT, BTC)\n\n¿Tenés consultas? ¡Escribinos por WhatsApp! 🚀");
+        return;
+      }
+      
+      alert(`💳 *OPCIÓN DE CRÉDITO - PLAN BÁSICO*\n\n✅ Adquirí tu landing por $88.000 en:\n\n• 2 cuotas fijas de $48.000 pesos\n• Sin interés adicional\n• Aprobación inmediata\n\n🔹 Primera cuota: al confirmar el proyecto\n🔹 Segunda cuota: a los 15 días\n\n¡Empezá hoy y pagá cómodo! 🚀`);
     }
 
-    // === PARTÍCULAS + EFECTOS ===
-    particlesJS("particles-js", { particles: { number: { value: 80 }, color: { value: "#00F0FF" }, opacity: { value: 0.4 }, size: { value: 3 }, line_linked: { enable: true, distance: 150, color: "#00F0FF", opacity: 0.2 }, move: { enable: true, speed: 2 } }, interactivity: { events: { onhover: { enable: true, mode: "repulse" } } } });
+    // ============================================
+    // 🔔 FUNCIÓN: MOSTRAR NOTIFICACIÓN TEMPORAL
+    // ============================================
+    function mostrarNotificacion(mensaje) {
+      // Crear elemento de notificación
+      const notif = document.createElement('div');
+      notif.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-6 py-4 glass border border-accent/50 rounded-2xl text-accent font-medium shadow-2xl animate-slideDown';
+      notif.style.maxWidth = '90%';
+      notif.style.textAlign = 'center';
+      notif.innerHTML = mensaje;
+      
+      document.body.appendChild(notif);
+      
+      // Eliminar después de 4 segundos
+      setTimeout(() => {
+        notif.style.opacity = '0';
+        notif.style.transform = 'translateY(-20px)';
+        notif.style.transition = 'all 0.3s ease';
+        setTimeout(() => notif.remove(), 300);
+      }, 4000);
+    }
 
-    // === DESPLEGABLES DE LAS TARJETAS (mismo que antes) ===
-    function showBasicoMessage() {
-      alert(`Si tu negocio todavía no tiene presencia online, el Servicio Básico de NEXO-Art es tu puerta de entrada al mundo digital. Te entregamos una landing page 100% estática, con diseño premium responsive que se adapta a cualquier dispositivo y un formulario de captura inteligente para que cada visita se convierta en un contacto real. Es rápido, seguro y sin complicaciones: en pocos días tendrás una página profesional que transmite confianza y empieza a generar clientes. Con NEXO-Art, tu negocio deja de estar invisible y comienza a crecer desde el primer clic.`);
+    // ============================================
+    // 🎨 INICIALIZAR PARTÍCULAS
+    // ============================================
+    function inicializarParticulas() {
+      if (typeof particlesJS !== 'undefined') {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: "#00F0FF" },
+            shape: { type: "circle" },
+            opacity: { value: 0.4, random: true },
+            size: { value: 3, random: true },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#00F0FF",
+              opacity: 0.2,
+              width: 1
+            },
+            move: {
+              enable: true,
+              speed: 2,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false
+            }
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true
+            }
+          },
+          retina_detect: true
+        });
+      }
     }
-    function showAvanzadoMessage() {
-      alert(`Tu negocio necesita más que una página web: necesita una landing optimizada para convertir. Con nuestro Servicio Avanzado, te entregamos una landing con animaciones premium que captan la atención al instante y un CRM automático que organiza y clasifica cada contacto sin que tengas que mover un dedo. Además, tu página está diseñada con enfoque CRO, garantizando velocidad extrema y resultados medibles. En NEXO-Art no solo diseñamos, construimos embudos de ventas inteligentes que trabajan para vos las 24 horas. Elige el Servicio Avanzado y transforma cada visita en una oportunidad real de negocio.`);
-    }
-    function showPremiumMessage() {
-      alert(`Tu negocio no necesita una simple página web, necesita una herramienta digital completa que trabaje para vos las 24 horas. Con nuestro Servicio Premium, diseñamos una web full custom, hecha a medida para tu marca, optimizada con SEO técnico avanzado para que aparezcas en Google y atraigas clientes sin depender de publicidad paga. Además, te damos mantenimiento mensual, asegurando que tu sitio esté siempre actualizado, seguro y funcionando al máximo. En NEXO-Art no vendemos páginas, vendemos resultados reales: más visibilidad, más confianza, más ventas.`);
-    }
+
+    // ============================================
+    // 🚀 INICIALIZACIÓN AL CARGAR LA PÁGINA
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. Inicializar partículas
+      inicializarParticulas();
+      
+      // 2. Recuperar país guardado
+      try {
+        const paisGuardado = localStorage.getItem('nexoar-pais');
+        if (paisGuardado && preciosPorPais[paisGuardado]) {
+          const selector = document.getElementById('countrySelector');
+          selector.value = paisGuardado;
+          paisActual = paisGuardado;
+          cambiarPais(); // Aplicar precios sin animación inicial
+        }
+      } catch(e) {
+        console.log('localStorage no disponible');
+      }
+      
+      // 3. Cerrar modal con tecla ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          cerrarModal();
+        }
+      });
+      
+      // 4. Cerrar modal al hacer clic fuera
+      document.getElementById('whatsappModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          cerrarModal();
+        }
+      });
+      
+      // 5. Smooth scroll para enlaces internos
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+      
+      // 6. Lazy load para iframes
+      if ('loading' in HTMLIFrameElement.prototype) {
+        document.querySelectorAll('iframe[loading="lazy"]').forEach(iframe => {
+          iframe.src = iframe.src;
+        });
+      }
+    });
+
+    // ============================================
+    // 📊 FUNCIÓN OPCIONAL: REGISTRAR CONVERSIÓN
+    // ============================================
+    // function registrarConversion(datos) {
+    //   // Ejemplo: enviar a Google Analytics, Meta Pixel, o tu CRM
+    //   if (typeof gtag !== 'undefined') {
+    //     gtag('event', 'conversion', {
+    //       'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXX',
+    //       'value': 1.0,
+    //       'currency': 'USD',
+    //       'transaction_id': `${datos.plan}_${datos.pais}_${Date.now()}`
+    //     });
+    //   }
+    //   
+    //   // Ejemplo: webhook a tu backend
+    //   // fetch('https://tu-api.com/webhook/conversion', {
+    //   //   method: 'POST',
+    //   //   headers: { 'Content-Type': 'application/json' },
+    //   //   body: JSON.stringify(datos)
+    //   // });
+    // }
   </script>
 </body>
 </html>
-
 
 
 
