@@ -221,9 +221,25 @@
       <div class="flex items-center gap-2 mt-2 sm:mt-0 sm:ml-4">
         <span class="text-gray-400 text-xs">🌎</span>
         <select id="countrySelector" class="country-select text-sm" onchange="cambiarPais()" aria-label="Seleccionar país">
-          <option value="argentina">🇦 Argentina</option>
+          <option value="argentina">🇦🇷 Argentina</option>
+          <option value="bolivia">🇧🇴 Bolivia</option>
+          <option value="brasil">🇧🇷 Brasil</option>
           <option value="chile">🇨🇱 Chile</option>
+          <option value="colombia">🇨🇴 Colombia</option>
+          <option value="costarica">🇨🇷 Costa Rica</option>
+          <option value="cuba">🇨🇺 Cuba</option>
+          <option value="ecuador">🇪🇨 Ecuador</option>
+          <option value="elsalvador">🇸🇻 El Salvador</option>
+          <option value="guatemala">🇬🇹 Guatemala</option>
+          <option value="honduras">🇭🇳 Honduras</option>
+          <option value="mexico">🇲🇽 México</option>
+          <option value="nicaragua">🇳🇮 Nicaragua</option>
+          <option value="panama">🇵🇦 Panamá</option>
+          <option value="paraguay">🇵🇾 Paraguay</option>
+          <option value="peru">🇵🇪 Perú</option>
+          <option value="rd">🇩🇴 República Dominicana</option>
           <option value="uruguay">🇺🇾 Uruguay</option>
+          <option value="venezuela">🇻 Venezuela</option>
         </select>
       </div>
     </div>
@@ -414,7 +430,7 @@
         <h3 class="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 mt-2 sm:mt-0">Avanzado Empresa</h3>
         <div id="price-avanzado" class="text-5xl sm:text-7xl font-black text-primary mb-6 sm:mb-8 price-badge text-shadow">$160.000</div>
         
-        <ul class="text-left space-y-3 sm:space-y-5 text-gray-200 text-base sm:text-lg mb-8 sm:mb-12 flex-grow">
+        <ul class="text-left space-y-3 sm:space-y-5 text-gray-200 text-base sm:text-lg mb-6 sm:mb-8 flex-grow">
           <li class="leading-relaxed flex items-start gap-3">
             <span class="text-primary mt-1">✓</span>
             <span>Todo lo del Básico</span>
@@ -429,13 +445,19 @@
           </li>
           <li class="leading-relaxed flex items-start gap-3">
             <span class="text-primary mt-1">✓</span>
-            <span>Diagnóstico mensual</span>
+            <span>Mantenimiento mensual</span>
           </li>
           <li class="leading-relaxed flex items-start gap-3">
             <span class="text-primary mt-1">✓</span>
             <span>Entrega en 24HS</span>
           </li>
         </ul>
+
+        <!-- MICRO TARJETA MANTENIMIENTO MENSUAL -->
+        <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-primary/20 to-cyan-400/20 border-2 border-primary/50 rounded-2xl">
+          <p class="text-sm text-gray-300 mb-1">Mantenimiento Mensual</p>
+          <p id="price-mantenimiento-avanzado" class="text-2xl sm:text-3xl font-black text-primary">$20 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
+        </div>
         
         <button onclick="abrirModal('Avanzado')" class="w-full py-5 sm:py-7 bg-primary text-black font-black text-xl sm:text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-primary">
           RESERVAR MI AVANZADO
@@ -447,7 +469,7 @@
         <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Premium</h3>
         <div id="price-premium" class="text-4xl sm:text-6xl font-black text-secondary mb-6 sm:mb-8 price-badge text-shadow">$180.000</div>
         
-        <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
+        <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 flex-grow">
           <li class="leading-relaxed flex items-start gap-3">
             <span class="text-secondary mt-1">✓</span>
             <span>Todo lo del Avanzado</span>
@@ -473,6 +495,12 @@
             <span>Entrega en 24HS</span>
           </li>
         </ul>
+
+        <!-- MICRO TARJETA MANTENIMIENTO MENSUAL -->
+        <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-secondary/20 to-pink-500/20 border-2 border-secondary/50 rounded-2xl">
+          <p class="text-sm text-gray-300 mb-1">Mantenimiento Mensual</p>
+          <p id="price-mantenimiento-premium" class="text-2xl sm:text-3xl font-black text-secondary">$20 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
+        </div>
         
         <button onclick="abrirModal('Premium')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-secondary">
           DOMINAR MI MERCADO
@@ -482,7 +510,7 @@
     
     <!-- Nota de precios -->
     <p class="text-center text-gray-500 text-sm mt-12 max-w-2xl mx-auto">
-      💡 <strong>Nota:</strong> Los precios en USD para Chile y Uruguay se pagan vía transferencia internacional, PayPal o criptomonedas. 
+      💡 <strong>Nota:</strong> Los precios en USD para Latinoamérica se pagan vía transferencia internacional, PayPal o criptomonedas. 
       Argentina: precios en pesos con opción de crédito para plan Básico.
     </p>
   </section>
@@ -665,18 +693,98 @@
     const preciosPorPais = {
       argentina: {
         basico: { precio: "$88.000", credito: "2 cuotas de $48.000", mostrarCredito: true, mostrarDescuento: true },
-        avanzado: { precio: "$160.000" },
-        premium: { precio: "$180.000" }
+        avanzado: { precio: "$160.000", mantenimiento: "$20 USD" },
+        premium: { precio: "$180.000", mantenimiento: "$20 USD" }
+      },
+      bolivia: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      brasil: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       chile: {
         basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
-        avanzado: { precio: "$120 USD" },
-        premium: { precio: "$160 USD" }
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      colombia: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      costarica: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      cuba: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      ecuador: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      elsalvador: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      guatemala: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      honduras: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      mexico: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      nicaragua: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      panama: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      paraguay: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      peru: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      rd: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       uruguay: {
         basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
-        avanzado: { precio: "$120 USD" },
-        premium: { precio: "$160 USD" }
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
+      },
+      venezuela: {
+        basico: { precio: "$70 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
+        premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       }
     };
 
@@ -706,6 +814,16 @@
           }, 200);
         }
       });
+      
+      // Actualizar precios de mantenimiento
+      const mantAvanzado = document.getElementById('price-mantenimiento-avanzado');
+      const mantPremium = document.getElementById('price-mantenimiento-premium');
+      if (mantAvanzado) {
+        mantAvanzado.innerHTML = `${precios.avanzado.mantenimiento}<span class="text-sm text-gray-400 font-normal">/mes</span>`;
+      }
+      if (mantPremium) {
+        mantPremium.innerHTML = `${precios.premium.mantenimiento}<span class="text-sm text-gray-400 font-normal">/mes</span>`;
+      }
       
       // Mostrar/ocultar botón de crédito para plan Básico
       const btnCredito = document.getElementById('btn-credito-basico');
@@ -786,8 +904,8 @@
       const precios = preciosPorPais[pais];
       const mensajes = {
         "Básico": `🚀 *Hola NEXO-Art!* Me llamo *${nombre}* y quiero el plan *BÁSICO* por *${precios.basico.precio}*. ¡Empecemos ya!`,
-        "Avanzado": `🚀 *Hola NEXO-Art!* Soy *${nombre}* y quiero el plan *AVANZADO* por *${precios.avanzado.precio}*. ¡Es el más vendido y necesito que mi landing facture sola!`,
-        "Premium": `🚀 *Hola NEXO-Art!* Mi nombre es *${nombre}* y quiero el plan *PREMIUM* por *${precios.premium.precio}*. ¡Quiero dominar mi mercado con una web full custom!`
+        "Avanzado": `🚀 *Hola NEXO-Art!* Soy *${nombre}* y quiero el plan *AVANZADO EMPRESA* por *${precios.avanzado.precio}* + mantenimiento mensual *${precios.avanzado.mantenimiento}*. ¡Es el más vendido y necesito que mi landing facture sola!`,
+        "Premium": `🚀 *Hola NEXO-Art!* Mi nombre es *${nombre}* y quiero el plan *PREMIUM* por *${precios.premium.precio}* + mantenimiento mensual *${precios.premium.mantenimiento}*. ¡Quiero dominar mi mercado con una web full custom!`
       };
 
       let mensaje = mensajes[plan] || mensajes["Avanzado"];
@@ -815,7 +933,7 @@
       const precios = preciosPorPais[paisActual].basico;
       
       if (!precios.mostrarCredito) {
-        alert("💳 *Opción de crédito disponible solo para Argentina*\n\nPara Chile y Uruguay, el pago se realiza en USD vía:\n• Transferencia internacional\n• PayPal\n• Criptomonedas (USDT, BTC)\n\n¿Tenés consultas? ¡Escribinos por WhatsApp! 🚀");
+        alert("💳 *Opción de crédito disponible solo para Argentina*\n\nPara Latinoamérica, el pago se realiza en USD vía:\n• Transferencia internacional\n• PayPal\n• Criptomonedas (USDT, BTC)\n\n¿Tenés consultas? ¡Escribinos por WhatsApp! 🚀");
         return;
       }
       
