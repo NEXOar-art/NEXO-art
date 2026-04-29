@@ -180,6 +180,32 @@
     .badge-descount {
       transition: all 0.3s ease;
     }
+
+    /* === HOVER TEXT PARA TARJETAS DE PAGO === */
+    .payment-card {
+      position: relative;
+    }
+    .payment-card .hover-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: #374151;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .payment-card:hover .hover-text {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .payment-card:hover img {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-primary selection:text-black">
@@ -195,7 +221,7 @@
       <div class="flex items-center gap-2 mt-2 sm:mt-0 sm:ml-4">
         <span class="text-gray-400 text-xs">🌎</span>
         <select id="countrySelector" class="country-select text-sm" onchange="cambiarPais()" aria-label="Seleccionar país">
-          <option value="argentina">🇦🇷 Argentina</option>
+          <option value="argentina">🇦 Argentina</option>
           <option value="chile">🇨🇱 Chile</option>
           <option value="uruguay">🇺🇾 Uruguay</option>
         </select>
@@ -380,12 +406,12 @@
         </button>
       </article>
 
-      <!-- ===== PLAN AVANZADO (DESTACADO) ===== -->
+      <!-- ===== PLAN AVANZADO EMPRESA (DESTACADO) ===== -->
       <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border-4 border-primary shadow-2xl shadow-primary/60 transform md:scale-110 relative overflow-hidden flex flex-col">
         <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
         <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-primary to-cyan-400 text-black px-4 sm:px-8 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap shadow-lg z-10">🔥 MÁS VENDIDO</div>
         
-        <h3 class="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 mt-2 sm:mt-0">Avanzado</h3>
+        <h3 class="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 mt-2 sm:mt-0">Avanzado Empresa</h3>
         <div id="price-avanzado" class="text-5xl sm:text-7xl font-black text-primary mb-6 sm:mb-8 price-badge text-shadow">$160.000</div>
         
         <ul class="text-left space-y-3 sm:space-y-5 text-gray-200 text-base sm:text-lg mb-8 sm:mb-12 flex-grow">
@@ -505,6 +531,19 @@
           VER PROYECTO →
         </span>
       </a>
+
+      <!-- PROYECTO 4: AUXILIO DE CAMIONES DOLORES SORIANO -->
+      <a href="https://nexoar-art.github.io/AXILIO-DE-CAMIONES-DOLORES-SORIANO/" target="_blank" rel="noopener noreferrer" 
+         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+          <span class="text-4xl">🚛</span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">AUXILIO DE CAMIONES DOLORES SORIANO</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Servicio de auxilio vial • Diseño profesional • Captura de clientes 24/7</p>
+        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
+          VER PROYECTO →
+        </span>
+      </a>
     </div>
   </section>
 
@@ -517,6 +556,63 @@
         EMPEZAR YA →
       </button>
       <p class="text-sm text-gray-500 mt-4">Sin compromiso • Respuesta en minutos • Pago seguro</p>
+    </div>
+  </section>
+
+  <!-- 💳 MÉTODOS DE PAGO SEGUROS -->
+  <section class="py-12 px-4 sm:px-6 border-t border-white/10 bg-gradient-to-b from-black/50 to-transparent">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-center text-gray-400 text-sm mb-8 font-medium tracking-wide">
+        🔒 PAGOS 100% SEGUROS Y ENCRIPTADOS
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-16">
+        <!-- Mercado Pago -->
+        <div class="flex flex-col items-center gap-3 group cursor-pointer">
+          <div class="payment-card w-40 h-16 bg-white rounded-xl flex items-center justify-center p-4 shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+            <img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.1/mercadolibre/logo__small.png" 
+                 alt="Mercado Pago" 
+                 class="h-full object-contain transition-opacity duration-300"
+                 onerror="this.parentElement.innerHTML='<span class=\'text-blue-600 font-black text-xl\'>MercadoPago</span>'">
+            <span class="hover-text">MERCADO PAGO</span>
+          </div>
+          <span class="text-xs text-gray-500">Argentina</span>
+        </div>
+
+        <!-- PayPal -->
+        <div class="flex flex-col items-center gap-3 group cursor-pointer">
+          <div class="payment-card w-40 h-16 bg-white rounded-xl flex items-center justify-center p-4 shadow-lg shadow-blue-600/20 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" 
+                 alt="PayPal" 
+                 class="h-full object-contain transition-opacity duration-300"
+                 onerror="this.parentElement.innerHTML='<span class=\'text-blue-700 font-black text-xl\'>PayPal</span>'">
+            <span class="hover-text">PAYPAL</span>
+          </div>
+          <span class="text-xs text-gray-500">Internacional</span>
+        </div>
+
+        <!-- Global66 -->
+        <div class="flex flex-col items-center gap-3 group cursor-pointer">
+          <div class="payment-card w-40 h-16 bg-white rounded-xl flex items-center justify-center p-4 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+            <img src="GLOBAL66.png" 
+                 alt="Global66" 
+                 class="h-full object-contain transition-opacity duration-300"
+                 onerror="this.parentElement.innerHTML='<span class=\'text-purple-600 font-black text-xl\'>Global66</span>'">
+            <span class="hover-text">GLOBAL66</span>
+          </div>
+          <span class="text-xs text-gray-500">Latam</span>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center">
+        <p class="text-xs text-gray-500 flex items-center justify-center gap-2 flex-wrap">
+          <span>✓</span>
+          <span>Transferencias bancarias</span>
+          <span class="mx-2">•</span>
+          <span>Criptomonedas (USDT/BTC)</span>
+          <span class="mx-2">•</span>
+          <span>Tarjetas de crédito/débito</span>
+        </p>
+      </div>
     </div>
   </section>
 
