@@ -93,7 +93,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       appearance: none;
-      background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300F0FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300F0FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 12px center;
       background-size: 16px;
@@ -390,8 +390,16 @@
         <!-- 🏷️ BADGE 10% OFF (OCULTO PARA ARGENTINA) -->
         <div id="badge-10off" class="badge-descount absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap z-10 shadow-lg" style="display: none">10% OFF</div>
         
-        <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Básico</h3>
-        <div id="price-basico" class="text-4xl sm:text-6xl font-black mb-6 sm:mb-8 price-badge text-shadow">$88.000</div>
+        <!-- ✅ TÍTULO MODIFICADO -->
+        <h3 class="text-2xl sm:text-3xl font-black mb-3 sm:mb-4 leading-tight">BÁSICO<br><span class="text-base sm:text-lg font-medium text-gray-300">PIENSA EN GRANDE PARA PEQUEÑOS NEGOCIOS</span></h3>
+        
+        <div id="price-basico" class="text-4xl sm:text-6xl font-black mb-4 sm:mb-6 price-badge text-shadow">$88.000</div>
+        
+        <!-- ✅ MICRO TARJETA DE CUOTAS (NUEVO) -->
+        <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-accent/15 to-green-500/15 border-2 border-accent/40 rounded-2xl">
+          <p class="text-sm text-gray-300 mb-1">Opción de Crédito</p>
+          <p id="price-cuotas-basico" class="text-xl sm:text-2xl font-black text-accent">2 cuotas de $50.000<span class="text-sm text-gray-400 font-normal" id="cuotas-moneda"></span></p>
+        </div>
         
         <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
           <li class="leading-relaxed flex items-start gap-3">
@@ -412,9 +420,9 @@
           </li>
         </ul>
         
-        <!-- BOTÓN DE CRÉDITO (Solo Argentina) -->
+        <!-- BOTÓN DE CRÉDITO (Solo Argentina - ahora integrado en micro tarjeta) -->
         <button id="btn-credito-basico" onclick="mostrarInfoCredito()" class="w-full mb-3 sm:mb-4 py-2 sm:py-3 glass border border-accent/40 text-accent font-bold text-sm sm:text-base rounded-xl hover:bg-accent/10 transition flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-accent/50">
-          <span>💳</span> Pagar en 2 cuotas de $48.000
+          <span>ℹ️</span> Más info sobre cuotas
         </button>
         
         <button onclick="abrirModal('Básico')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-cyan-400">
@@ -708,101 +716,215 @@
   <!-- ⚙️ SCRIPT COMPLETO CON TODA LA LÓGICA -->
   <script>
     // ============================================
-    // 🌍 CONFIGURACIÓN DE PRECIOS POR PAÍS
+    // 🌍 CONFIGURACIÓN DE PRECIOS POR PAÍS (ACTUALIZADO)
     // ============================================
     const preciosPorPais = {
       argentina: {
-        basico: { precio: "$88.000", credito: "2 cuotas de $48.000", mostrarCredito: true, mostrarDescuento: false },
+        basico: { 
+          precio: "$88.000", 
+          credito: "2 cuotas de $50.000",  // ✅ ACTUALIZADO
+          mostrarCredito: true, 
+          mostrarDescuento: false,
+          moneda: ""  // Sin sufijo para pesos
+        },
         avanzado: { precio: "$160.000", mantenimiento: "$20 USD" },
         premium: { precio: "$180.000", mantenimiento: "$20 USD" }
       },
       bolivia: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",  // ✅ ACTUALIZADO
+          mostrarCredito: true,  // ✅ Ahora muestra opción de crédito para todos
+          mostrarDescuento: false,
+          moneda: ""  // El USD ya está incluido en el texto
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       brasil: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       chile: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       colombia: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       costarica: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       cuba: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       ecuador: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       elsalvador: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       guatemala: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       honduras: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       mexico: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       nicaragua: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       panama: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       paraguay: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       peru: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       rd: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       uruguay: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       },
       venezuela: {
-        basico: { precio: "$88 USD", credito: null, mostrarCredito: false, mostrarDescuento: false },
+        basico: { 
+          precio: "$88 USD", 
+          credito: "2 cuotas de $50 USD",
+          mostrarCredito: true,
+          mostrarDescuento: false,
+          moneda: ""
+        },
         avanzado: { precio: "$120 USD", mantenimiento: "$20 USD" },
         premium: { precio: "$160 USD", mantenimiento: "$20 USD" }
       }
@@ -845,12 +967,20 @@
         mantPremium.innerHTML = `${precios.premium.mantenimiento}<span class="text-sm text-gray-400 font-normal">/mes</span>`;
       }
       
-      // Mostrar/ocultar botón de crédito para plan Básico
+      // ✅ ACTUALIZAR MICRO TARJETA DE CUOTAS PARA PLAN BÁSICO
+      const cuotasBasico = document.getElementById('price-cuotas-basico');
+      const cuotasMoneda = document.getElementById('cuotas-moneda');
+      if (cuotasBasico && precios.basico.credito) {
+        // Extraer el monto y la moneda del texto de crédito
+        const creditoTexto = precios.basico.credito;
+        cuotasBasico.innerHTML = `${creditoTexto}<span class="text-sm text-gray-400 font-normal">/cuota</span>`;
+      }
+      
+      // Mostrar/ocultar botón de info de crédito para plan Básico
       const btnCredito = document.getElementById('btn-credito-basico');
       if (btnCredito) {
         if (precios.basico.mostrarCredito) {
           btnCredito.style.display = 'flex';
-          btnCredito.innerHTML = `<span>💳</span> Pagar en ${precios.basico.credito}`;
         } else {
           btnCredito.style.display = 'none';
         }
@@ -923,7 +1053,7 @@
       // Mensajes personalizados por plan y país
       const precios = preciosPorPais[pais];
       const mensajes = {
-        "Básico": `🚀 *Hola NEXO-Art!* Me llamo *${nombre}* y quiero el plan *BÁSICO* por *${precios.basico.precio}*. ¡Empecemos ya!`,
+        "Básico": `🚀 *Hola NEXO-Art!* Me llamo *${nombre}* y quiero el plan *BÁSICO - PIENSA EN GRANDE PARA PEQUEÑOS NEGOCIOS* por *${precios.basico.precio}* con opción de *${precios.basico.credito}*. ¡Empecemos ya!`,
         "Avanzado": `🚀 *Hola NEXO-Art!* Soy *${nombre}* y quiero el plan *AVANZADO EMPRESA* por *${precios.avanzado.precio}* + mantenimiento mensual *${precios.avanzado.mantenimiento}*. ¡Es el más vendido y necesito que mi landing facture sola!`,
         "Premium": `🚀 *Hola NEXO-Art!* Mi nombre es *${nombre}* y quiero el plan *PREMIUM* por *${precios.premium.precio}* + mantenimiento mensual *${precios.premium.mantenimiento}*. ¡Quiero dominar mi mercado con una web full custom!`
       };
@@ -941,9 +1071,6 @@
       // Cerrar modal y feedback
       cerrarModal();
       mostrarNotificacion('✅ ¡Mensaje enviado! Te contactaremos en breve');
-      
-      // Opcional: Analytics o CRM
-      // registrarConversion({ plan, pais, nombre, email });
     }
 
     // ============================================
@@ -951,13 +1078,9 @@
     // ============================================
     function mostrarInfoCredito() {
       const precios = preciosPorPais[paisActual].basico;
+      const esArgentina = paisActual === 'argentina';
       
-      if (!precios.mostrarCredito) {
-        alert("💳 *Opción de crédito disponible solo para Argentina*\n\nPara Latinoamérica, el pago se realiza en USD vía:\n• Transferencia internacional\n• PayPal\n• Criptomonedas (USDT, BTC)\n\n¿Tenés consultas? ¡Escribinos por WhatsApp! 🚀");
-        return;
-      }
-      
-      alert(`💳 *OPCIÓN DE CRÉDITO - PLAN BÁSICO*\n\n✅ Adquirí tu landing por $88.000 en:\n\n• 2 cuotas fijas de $48.000 pesos\n• Sin interés adicional\n• Aprobación inmediata\n\n🔹 Primera cuota: al confirmar el proyecto\n🔹 Segunda cuota: a los 15 días\n\n¡Empezá hoy y pagá cómodo! 🚀`);
+      alert(`💳 *OPCIÓN DE CRÉDITO - PLAN BÁSICO*\n\n✅ Adquirí tu landing por ${precios.precio} en:\n\n• ${precios.credito}\n• Sin interés adicional\n• Aprobación inmediata\n\n🔹 Primera cuota: al confirmar el proyecto\n🔹 Segunda cuota: a los 15 días\n\n${esArgentina ? '💰 Pago en pesos argentinos' : '💱 Pago en dólares USD (PayPal, transferencia o cripto)'}\n\n¡Empezá hoy y pagá cómodo! 🚀`);
     }
 
     // ============================================
@@ -1076,28 +1199,6 @@
         });
       }
     });
-
-    // ============================================
-    // 📊 FUNCIÓN OPCIONAL: REGISTRAR CONVERSIÓN
-    // ============================================
-    // function registrarConversion(datos) {
-    //   // Ejemplo: enviar a Google Analytics, Meta Pixel, o tu CRM
-    //   if (typeof gtag !== 'undefined') {
-    //     gtag('event', 'conversion', {
-    //       'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXX',
-    //       'value': 1.0,
-    //       'currency': 'USD',
-    //       'transaction_id': `${datos.plan}_${datos.pais}_${Date.now()}`
-    //     });
-    //   }
-    //   
-    //   // Ejemplo: webhook a tu backend
-    //   // fetch('https://tu-api.com/webhook/conversion', {
-    //   //   method: 'POST',
-    //   //   headers: { 'Content-Type': 'application/json' },
-    //   //   body: JSON.stringify(datos)
-    //   // });
-    // }
   </script>
 </body>
 </html>
