@@ -245,15 +245,28 @@
     </div>
   </header>
 
-  <!-- 📱 MODAL DE WHATSAPP -->
+  <!-- 📱 MODAL DE CONTACTO / FORMULARIO -->
   <div id="whatsappModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="glass p-6 sm:p-8 md:p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown">
-      <h3 id="modalTitle" class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6 text-center gradient-text">¡Último paso!</h3>
-      <p class="text-center text-lg sm:text-xl mb-6 sm:mb-8 text-gray-200">Te redirigimos a WhatsApp con tu propuesta personalizada</p>
+    <div class="glass p-6 sm:p-8 md:p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown max-h-[95vh] overflow-y-auto">
+      <h3 id="modalTitle" class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6 text-center gradient-text">¡Empecemos tu proyecto!</h3>
+      <p class="text-center text-base sm:text-lg mb-6 sm:mb-8 text-gray-200">Completá tus datos y te contactamos por WhatsApp con tu propuesta personalizada 🚀</p>
 
       <form id="whatsappForm" onsubmit="enviarWhatsApp(); return false;" class="space-y-4">
-        <input type="text" id="modalNombre" placeholder="Tu nombre *" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" required aria-required="true">
-        <input type="email" id="modalEmail" placeholder="Email (opcional)" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" aria-label="Email opcional">
+        <div>
+          <label for="modalNombre" class="block text-sm font-bold text-gray-300 mb-2 ml-1">👤 Nombre *</label>
+          <input type="text" id="modalNombre" placeholder="Ej: Juan Pérez" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" required aria-required="true">
+        </div>
+        
+        <div>
+          <label for="modalEmail" class="block text-sm font-bold text-gray-300 mb-2 ml-1">📧 Email <span class="text-gray-500 font-normal">(opcional)</span></label>
+          <input type="email" id="modalEmail" placeholder="tu@email.com" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" aria-label="Email opcional">
+        </div>
+        
+        <div>
+          <label for="modalIdea" class="block text-sm font-bold text-gray-300 mb-2 ml-1">💡 Contanos tu idea <span class="text-gray-500 font-normal">(opcional)</span></label>
+          <textarea id="modalIdea" rows="4" placeholder="Ej: Tengo un taller mecánico y necesito una landing para captar clientes..." class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500 resize-none" aria-label="Describe tu idea"></textarea>
+        </div>
+
         <input type="hidden" id="modalPlan">
         <input type="hidden" id="modalPais" value="argentina">
 
@@ -477,7 +490,7 @@
         <!-- MICRO TARJETA MANTENIMIENTO MENSUAL -->
         <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-primary/20 to-cyan-400/20 border-2 border-primary/50 rounded-2xl">
           <p class="text-sm text-gray-300 mb-1">Mantenimiento Mensual</p>
-          <p id="price-mantenimiento-avanzado" class="text-2xl sm:text-3xl font-black text-primary">$20 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
+          <p id="price-mantenimiento-avanzado" class="text-2xl sm:text-3xl font-black text-primary">$40 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
         </div>
         
         <button onclick="abrirModal('Avanzado')" class="w-full py-5 sm:py-7 bg-primary text-black font-black text-xl sm:text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-primary">
@@ -488,12 +501,21 @@
       <!-- ===== PLAN PREMIUM ===== -->
       <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-secondary/50 hover:border-secondary transition text-center flex flex-col">
         <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Premium</h3>
-        <div id="price-premium" class="text-4xl sm:text-6xl font-black text-secondary mb-6 sm:mb-8 price-badge text-shadow">$180.000</div>
+        <p class="text-xs sm:text-sm text-secondary font-bold mb-2 uppercase tracking-wider">E-commerce + Ecosistema de Venta Autónoma (NEXO-ART)</p>
+        <div id="price-premium" class="text-4xl sm:text-6xl font-black text-secondary mb-6 sm:mb-8 price-badge text-shadow">$430.000</div>
         
         <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 flex-grow">
           <li class="leading-relaxed flex items-start gap-3">
             <span class="text-secondary mt-1">✓</span>
             <span>Todo lo del Avanzado</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>E-commerce completo</span>
+          </li>
+          <li class="leading-relaxed flex items-start gap-3">
+            <span class="text-secondary mt-1">✓</span>
+            <span>Ecosistema de Venta Autónoma (NEXO-ART)</span>
           </li>
           <li class="leading-relaxed flex items-start gap-3">
             <span class="text-secondary mt-1">✓</span>
@@ -516,7 +538,7 @@
         <!-- MICRO TARJETA MANTENIMIENTO MENSUAL -->
         <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-secondary/20 to-pink-500/20 border-2 border-secondary/50 rounded-2xl">
           <p class="text-sm text-gray-300 mb-1">Mantenimiento Mensual</p>
-          <p id="price-mantenimiento-premium" class="text-2xl sm:text-3xl font-black text-secondary">$20 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
+          <p id="price-mantenimiento-premium" class="text-2xl sm:text-3xl font-black text-secondary">$40 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
         </div>
         
         <button onclick="abrirModal('Premium')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-secondary">
@@ -536,52 +558,39 @@
   <section class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
     <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2 gradient-text">TRABAJOS REALIZADOS</h2>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
       
-      <!-- PROYECTO 1: MECANICA LEON -->
-      <a href="https://nexoar-art.github.io/MECANICA-LEON/" target="_blank" rel="noopener noreferrer" 
+      <!-- PROYECTO 1: ROTISERIA MALVINAS -->
+      <a href="https://nexoar-art.github.io/ROTISERIA-MALVINAS/" target="_blank" rel="noopener noreferrer" 
          class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-          <span class="text-4xl">🔧</span>
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-orange-700 to-red-900 flex items-center justify-center">
+          <span class="text-5xl">🍗</span>
         </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">MECANICA LEON</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Landing page para taller mecánico • Diseño responsive • Captura de leads</p>
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">ROTISERÍA MALVINAS</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Landing page para rotisería • Pedidos online • Captura de clientes locales</p>
         <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
           VER PROYECTO →
         </span>
       </a>
 
-      <!-- PROYECTO 2: PEKA AUTOPARTS -->
-      <a href="https://nexoar-art.github.io/PEKA-AUTOPART/" target="_blank" rel="noopener noreferrer" 
+      <!-- PROYECTO 2: TONGOY -->
+      <a href="https://nexoar-art.github.io/TONGOY/" target="_blank" rel="noopener noreferrer" 
          class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-          <span class="text-4xl">🚗</span>
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-600 to-blue-900 flex items-center justify-center">
+          <span class="text-5xl">🏖️</span>
         </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">PEKA AUTOPARTS</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">E-commerce estático para autopartes • Catálogo interactivo • Optimizado para móviles</p>
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">TONGOY</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Sitio turístico y de servicios • Diseño moderno • Optimizado para búsquedas</p>
         <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
           VER PROYECTO →
         </span>
       </a>
 
-      <!-- PROYECTO 3: ARGENTPLAY -->
-      <a href="https://nexoar-art.github.io/ArgenPlay/" target="_blank" rel="noopener noreferrer" 
-         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-          <span class="text-4xl">🎮</span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">ARGENTPLAY</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Plataforma de gaming • Animaciones premium • Experiencia inmersiva</p>
-        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
-          VER PROYECTO →
-        </span>
-      </a>
-
-      <!-- PROYECTO 4: AUXILIO DE CAMIONES DOLORES SORIANO -->
+      <!-- PROYECTO 3: AUXILIO DE CAMIONES DOLORES SORIANO -->
       <a href="https://nexoar-art.github.io/AXILIO-DE-CAMIONES-DOLORES-SORIANO/" target="_blank" rel="noopener noreferrer" 
          class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
         <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-          <span class="text-4xl">🚛</span>
+          <span class="text-5xl">🚛</span>
         </div>
         <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">AUXILIO DE CAMIONES DOLORES SORIANO</h3>
         <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Servicio de auxilio vial • Diseño profesional • Captura de clientes 24/7</p>
@@ -589,6 +598,46 @@
           VER PROYECTO →
         </span>
       </a>
+
+      <!-- PROYECTO 4: TALLER VICAN GNC FC RACING TUNE MOTOS -->
+      <a href="https://nexoar-art.github.io/TALLER-VICAN-GNC-FC-RACING-TUNE-MOTOS/" target="_blank" rel="noopener noreferrer" 
+         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center">
+          <span class="text-5xl">🔧</span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">TALLER VICAN GNC / TUNE MOTOS</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Taller mecánico multi-servicio • GNC • Customización de motos</p>
+        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
+          VER PROYECTO →
+        </span>
+      </a>
+
+      <!-- PROYECTO 5: FC RACING -->
+      <a href="https://fc-racing.vercel.app/" target="_blank" rel="noopener noreferrer" 
+         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-red-700 to-black flex items-center justify-center">
+          <span class="text-5xl">🏎️</span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">FC RACING</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Equipo de competición • Diseño deportivo de alto impacto • Presencia profesional</p>
+        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
+          VER PROYECTO →
+        </span>
+      </a>
+
+      <!-- PROYECTO 6: CASA EN ALQUILER CÓRDOBA -->
+      <a href="https://nexoar-art.github.io/casa-en-alquiler-cordoba/" target="_blank" rel="noopener noreferrer" 
+         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
+        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-emerald-700 to-teal-900 flex items-center justify-center">
+          <span class="text-5xl">🏠</span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">CASA EN ALQUILER CÓRDOBA</h3>
+        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Inmobiliaria / Alquiler temporal • Galería de fotos • Reservas directas</p>
+        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
+          VER PROYECTO →
+        </span>
+      </a>
+
     </div>
   </section>
 
@@ -737,152 +786,152 @@
           precio: "$98.000", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160.000", mantenimiento: "$20 USD" },
-        premium: { precio: "$320.000", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160.000", mantenimiento: "$40 USD" },
+        premium: { precio: "$430.000", mantenimiento: "$40 USD" }
       },
       bolivia: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       brasil: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       chile: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       colombia: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       costarica: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       cuba: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       ecuador: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       elsalvador: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       guatemala: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       honduras: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       mexico: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       nicaragua: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       panama: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       paraguay: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       peru: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       rd: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       uruguay: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       },
       venezuela: {
         basico: { 
           precio: "$90 USD", 
           mostrarDescuento: false
         },
-        avanzado: { precio: "$160 USD", mantenimiento: "$20 USD" },
-        premium: { precio: "$250 USD", mantenimiento: "$20 USD" }
+        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
+        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
       }
     };
 
@@ -948,7 +997,7 @@
     }
 
     // ============================================
-    // 💬 FUNCIÓN: ABRIR MODAL DE WHATSAPP
+    // 💬 FUNCIÓN: ABRIR MODAL FORMULARIO
     // ============================================
     function abrirModal(plan) {
       document.getElementById('modalPlan').value = plan;
@@ -977,6 +1026,7 @@
     function enviarWhatsApp() {
       const nombre = document.getElementById('modalNombre').value.trim();
       const email = document.getElementById('modalEmail').value.trim();
+      const idea = document.getElementById('modalIdea').value.trim();
       const plan = document.getElementById('modalPlan').value;
       const pais = document.getElementById('modalPais').value || paisActual;
 
@@ -992,11 +1042,12 @@
       const mensajes = {
         "Básico": `🚀 *Hola NEXO-Art!* Me llamo *${nombre}* y quiero el plan *BÁSICO - PIENSA EN GRANDE PARA PEQUEÑOS NEGOCIOS* por *${precios.basico.precio}*. ¡Empecemos ya!`,
         "Avanzado": `🚀 *Hola NEXO-Art!* Soy *${nombre}* y quiero el plan *AVANZADO EMPRESA* por *${precios.avanzado.precio}* + mantenimiento mensual *${precios.avanzado.mantenimiento}*. ¡Es el más vendido y necesito que mi landing facture sola!`,
-        "Premium": `🚀 *Hola NEXO-Art!* Mi nombre es *${nombre}* y quiero el plan *PREMIUM* por *${precios.premium.precio}* + mantenimiento mensual *${precios.premium.mantenimiento}*. ¡Quiero dominar mi mercado con una web full custom!`
+        "Premium": `🚀 *Hola NEXO-Art!* Mi nombre es *${nombre}* y quiero el plan *PREMIUM (E-commerce + Ecosistema de Venta Autónoma)* por *${precios.premium.precio}* + mantenimiento mensual *${precios.premium.mantenimiento}*. ¡Quiero dominar mi mercado!`
       };
 
       let mensaje = mensajes[plan] || mensajes["Avanzado"];
       if (email) mensaje += `\n📧 Email: ${email}`;
+      if (idea) mensaje += `\n💡 *Mi idea:* ${idea}`;
       mensaje += `\n🌍 País: ${pais.charAt(0).toUpperCase() + pais.slice(1)}`;
 
       const textoFinal = encodeURIComponent(mensaje);
@@ -1096,10 +1147,10 @@
       // 1. Inicializar partículas
       inicializarParticulas();
       
-      // 2. Recuperar país guardado
+      // 2. Recuperar país guardado (si existe, aplicar sus precios)
       try {
         const paisGuardado = localStorage.getItem('nexoar-pais');
-        if (paisGuardado && preciosPorPais[paisGuardado]) {
+        if (paisGuardado && preciosPorPais[paisGuardado] && paisGuardado !== 'argentina') {
           const selector = document.getElementById('countrySelector');
           selector.value = paisGuardado;
           paisActual = paisGuardado;
