@@ -1,1203 +1,850 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Landings 100% estáticas que facturan solas•"/>
-  <title>NEXOar-Art | Landing que Convierte Sola</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
-          colors: { 
-            primary: '#00F0FF', 
-            secondary: '#FF00FF', 
-            accent: '#39FF14',
-            dark: '#0a0a1a'
-          },
-          animation: { 
-            slideDown: 'slideDown 0.6s ease-out', 
-            pulseBtn: 'pulse 2s infinite',
-            float: 'float 3s ease-in-out infinite'
-          },
-          keyframes: { 
-            slideDown: { 
-              '0%': { opacity:0, transform:'translateY(-50px)' }, 
-              '100%': { opacity:1, transform:'translateY(0)' } 
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXO-ART | Diseñamos Experiencias. Creamos Negocios.</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6.4.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#030712',
+                        cardBg: '#0a0f24',
+                        purpleNeon: '#7c3aed',
+                        purpleGlow: '#a855f7',
+                        cyanNeon: '#06b6d4',
+                        cyanGlow: '#38bdf8'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
+    </script>
+    <style>
+        body {
+            background-color: #030712;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
 
-  <style>
-    /* === ESTILOS BASE === */
-    body { 
-      background:#050511; 
-      color:white; 
-      overflow-x:hidden; 
-      font-feature-settings: "ss01", "ss02", "cv01", "cv02";
-    }
-    
-    /* === GLASSMORPHISM === */
-    .glass { 
-      background:rgba(255,255,255,0.06); 
-      backdrop-filter:blur(20px); 
-      border:1px solid rgba(255,255,255,0.12); 
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    }
-    
-    /* === TEXTO GRADIENTE ANIMADO === */
-    .gradient-text { 
-      background:linear-gradient(90deg,#00F0FF,#FF00FF,#39FF14,#00F0FF); 
-      background-size:400%; 
-      -webkit-background-clip:text; 
-      -webkit-text-fill-color:transparent; 
-      background-clip:text;
-      animation:gradient 6s ease infinite; 
-    }
-    @keyframes gradient { 
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    
-    /* === PARTÍCULAS DE FONDO === */
-    #particles-js { 
-      position:fixed; 
-      inset:0; 
-      z-index:1; 
-      pointer-events:none; 
-    }
-    
-    /* === SELECTOR DE PAÍSES === */
-    .country-select {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(0,240,255,0.4);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300F0FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      background-size: 16px;
-      padding-right: 36px;
-      font-size: 0.875rem;
-    }
-    .country-select:hover, .country-select:focus {
-      border-color: #00F0FF;
-      box-shadow: 0 0 20px rgba(0,240,255,0.3);
-      outline: none;
-      background-color: rgba(0,240,255,0.1);
-    }
-    .country-select option {
-      background: #050511;
-      color: white;
-      padding: 8px;
-    }
-    
-    /* === ANIMACIÓN DE CAMBIO DE PRECIO === */
-    .price-badge {
-      transition: all 0.3s ease;
-    }
-    .price-change {
-      animation: pricePulse 0.4s ease;
-    }
-    @keyframes pricePulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: 0.9; color: #00F0FF; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    
-    /* === HOVER EFFECTS PARA TARJETAS === */
-    .plan-card {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .plan-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0,240,255,0.2);
-    }
-    
-    /* === BOTONES CON EFECTO GLOW === */
-    .btn-glow {
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-glow::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.5s;
-    }
-    .btn-glow:hover::before {
-      left: 100%;
-    }
-    
-    /* === SCROLLBAR PERSONALIZADO === */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #050511;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #00F0FF, #FF00FF);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #FF00FF, #00F0FF);
-    }
-    
-    /* === UTILIDADES === */
-    .text-shadow {
-      text-shadow: 0 0 20px rgba(0,240,255,0.5);
-    }
-    .border-glow {
-      box-shadow: 0 0 20px rgba(0,240,255,0.3);
-    }
-    
-    /* === ANIMACIÓN DEL BADGE DE DESCUENTO === */
-    .badge-descount {
-      transition: all 0.3s ease;
-    }
+        /* Fullscreen Image Canvas Layer */
+        #hero-canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
 
-    /* === HOVER TEXT PARA TARJETAS DE PAGO === */
-    .payment-card {
-      position: relative;
-    }
-    .payment-card .hover-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0;
-      transition: all 0.3s ease;
-      font-weight: 700;
-      font-size: 0.875rem;
-      color: #374151;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    .payment-card:hover .hover-text {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    .payment-card:hover img {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-  </style>
+        .bg-canvas-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.08);
+            filter: brightness(0.4) contrast(1.15) saturate(1.1);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .bg-canvas-img.img-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Glassmorphism Design System */
+        .glass-panel {
+            background: rgba(10, 15, 36, 0.78);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.8);
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.25), 0 0 15px rgba(124, 58, 237, 0.2);
+            transform: translateY(-4px);
+        }
+
+        /* Neon Glow Effects */
+        .btn-neon {
+            background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon:hover {
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.8);
+            transform: scale(1.03);
+        }
+
+        /* Interactive Showcase Image Frame */
+        .showcase-frame {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .showcase-frame:hover {
+            border-color: rgba(6, 182, 212, 0.8);
+            transform: scale(1.02) rotateX(1deg);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Motor Cinema Scroll Perspective */
+        .cinema-section {
+            opacity: 0.25;
+            transform: scale(0.92) translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+
+        .cinema-section.cinema-active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Cuadrícula Tecnológica */
+        .bg-grid-pattern {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7c3aed;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
 </head>
-<body class="antialiased selection:bg-primary selection:text-black">
+<body class="bg-darkBg text-gray-100 antialiased select-none bg-grid-pattern relative">
 
-  <!-- ✨ BARRA DE MARCA NEXO-ART - INTELIGENCIA QUE CONVIERTE ✨ -->
-  <header class="fixed top-0 left-0 right-0 z-40 py-3 px-4 text-center glass border-b border-white/10">
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
-      <span class="text-primary font-mono font-black text-lg tracking-wider">NEXO-ART</span>
-      <span class="text-gray-500 text-xs sm:text-sm hidden sm:inline">•</span>
-      <span class="text-gray-300 text-xs sm:text-sm font-medium">Inteligencia que convierte visitantes en clientes</span>
-      
-      <!-- 🌍 SELECTOR DE PAÍSES -->
-      <div class="flex items-center gap-2 mt-2 sm:mt-0 sm:ml-4">
-        <span class="text-gray-400 text-xs">🌎</span>
-        <select id="countrySelector" class="country-select text-sm" onchange="cambiarPais()" aria-label="Seleccionar país">
-          <option value="argentina">🇦🇷 Argentina</option>
-          <option value="bolivia">🇧🇴 Bolivia</option>
-          <option value="brasil">🇧 Brasil</option>
-          <option value="chile">🇨🇱 Chile</option>
-          <option value="colombia">🇨🇴 Colombia</option>
-          <option value="costarica">🇨🇷 Costa Rica</option>
-          <option value="cuba">🇨🇺 Cuba</option>
-          <option value="ecuador">🇪🇨 Ecuador</option>
-          <option value="elsalvador">🇸🇻 El Salvador</option>
-          <option value="guatemala">🇬🇹 Guatemala</option>
-          <option value="honduras">🇭 Honduras</option>
-          <option value="mexico">🇲 México</option>
-          <option value="nicaragua">🇳🇮 Nicaragua</option>
-          <option value="panama">🇵🇦 Panamá</option>
-          <option value="paraguay">🇵🇾 Paraguay</option>
-          <option value="peru">🇵🇪 Perú</option>
-          <option value="rd">🇩🇴 República Dominicana</option>
-          <option value="uruguay">🇺🇾 Uruguay</option>
-          <option value="venezuela">🇻🇪 Venezuela</option>
-        </select>
-      </div>
+    <!-- 1. CANVAS DE IMÁGENES DE FONDO DE ALTA CALIDAD (SEGUNDO PLANO PARALLAX) -->
+    <div id="hero-canvas-container">
+        <img id="bg-img-0" src="NEXO1.png" alt="Nexo Art Hero" class="bg-canvas-img img-active">
+        <img id="bg-img-1" src="NEO2.png" alt="Landing Page Showcase" class="bg-canvas-img">
+        <img id="bg-img-2" src="NEXO3.png" alt="Tiendas Online Showcase" class="bg-canvas-img">
+        <img id="bg-img-3" src="NEXO4.png" alt="Restaurante E-Commerce Showcase" class="bg-canvas-img">
+        <img id="bg-img-4" src="NEXO5.png" alt="Motopartes E-Commerce Showcase" class="bg-canvas-img">
+        <!-- Overlay Cibernético -->
+        <div class="absolute inset-0 bg-gradient-to-b from-darkBg/80 via-darkBg/60 to-darkBg"></div>
     </div>
-  </header>
 
-  <!-- 📱 MODAL DE CONTACTO / FORMULARIO -->
-  <div id="whatsappModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="glass p-6 sm:p-8 md:p-10 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown max-h-[95vh] overflow-y-auto">
-      <h3 id="modalTitle" class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6 text-center gradient-text">¡Empecemos tu proyecto!</h3>
-      <p class="text-center text-base sm:text-lg mb-6 sm:mb-8 text-gray-200">Completá tus datos y te contactamos por WhatsApp con tu propuesta personalizada 🚀</p>
+    <!-- 2. HEADER FLOTANTE NAVEGABLE -->
+    <header class="fixed top-0 left-0 w-full z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto glass-panel rounded-2xl px-6 py-3 flex items-center justify-between shadow-2xl">
+            <!-- Logo NEXO-ART -->
+            <a href="#inicio" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purpleNeon to-cyanNeon flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-purpleNeon/30 group-hover:scale-105 transition-transform">
+                    N
+                </div>
+                <span class="font-bold text-xl tracking-wider text-white">NEXO<span class="text-cyanNeon">-ART</span></span>
+            </a>
 
-      <form id="whatsappForm" onsubmit="enviarWhatsApp(); return false;" class="space-y-4">
-        <div>
-          <label for="modalNombre" class="block text-sm font-bold text-gray-300 mb-2 ml-1">👤 Nombre *</label>
-          <input type="text" id="modalNombre" placeholder="Ej: Juan Pérez" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" required aria-required="true">
-        </div>
-        
-        <div>
-          <label for="modalEmail" class="block text-sm font-bold text-gray-300 mb-2 ml-1">📧 Email <span class="text-gray-500 font-normal">(opcional)</span></label>
-          <input type="email" id="modalEmail" placeholder="tu@email.com" class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500" aria-label="Email opcional">
-        </div>
-        
-        <div>
-          <label for="modalIdea" class="block text-sm font-bold text-gray-300 mb-2 ml-1">💡 Contanos tu idea <span class="text-gray-500 font-normal">(opcional)</span></label>
-          <textarea id="modalIdea" rows="4" placeholder="Ej: Tengo un taller mecánico y necesito una landing para captar clientes..." class="w-full px-4 sm:px-6 py-4 sm:py-5 glass border border-white/20 rounded-2xl focus:border-primary focus:outline-none text-base bg-transparent placeholder-gray-500 resize-none" aria-label="Describe tu idea"></textarea>
-        </div>
+            <!-- Buscador de Países LATAM -->
+            <div class="relative hidden md:block w-64">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 text-gray-400 text-xs"></i>
+                    <input type="text" id="country-search" placeholder="Buscar país (ej: Argentina)..." 
+                        class="w-full bg-slate-900/80 border border-slate-700/60 rounded-xl pl-8 pr-8 py-1.5 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-cyanNeon transition-colors"
+                        autocomplete="off">
+                    <button id="clear-search" class="absolute right-2 text-gray-400 hover:text-white hidden text-xs">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div id="search-dropdown" class="absolute top-full left-0 w-full mt-2 glass-panel rounded-xl overflow-hidden hidden z-50">
+                    <ul id="country-list" class="max-h-40 overflow-y-auto text-xs py-1"></ul>
+                </div>
+            </div>
 
-        <input type="hidden" id="modalPlan">
-        <input type="hidden" id="modalPais" value="argentina">
+            <!-- Header Badge & Quick Links -->
+            <div class="flex items-center gap-4">
+                <div id="region-badge" class="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 border border-purpleNeon/40 text-xs font-semibold text-cyanNeon">
+                    <span id="badge-flag">🇦🇷</span>
+                    <span id="badge-text">ARS</span>
+                </div>
 
-        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
-          <button type="button" onclick="cerrarModal()" class="w-full sm:flex-1 py-4 sm:py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary/50">
-            Cancelar
-          </button>
-          <button type="submit" class="w-full sm:flex-1 py-4 sm:py-5 bg-gradient-to-r from-green-500 to-emerald-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl focus:outline-none focus:ring-2 focus:ring-green-400">
-            Enviar por WhatsApp 🚀
-          </button>
+                <nav class="hidden lg:flex items-center gap-5 text-xs font-medium text-gray-300">
+                    <a href="#inicio" class="hover:text-cyanNeon transition-colors">Inicio</a>
+                    <a href="#landing-page" class="hover:text-cyanNeon transition-colors">Landings</a>
+                    <a href="#tienda-online" class="hover:text-cyanNeon transition-colors">Tiendas</a>
+                    <a href="#restaurante" class="hover:text-cyanNeon transition-colors">Gastronomía</a>
+                    <a href="#motopartes" class="hover:text-cyanNeon transition-colors">Catálogos</a>
+                    <a href="#planes" class="hover:text-cyanNeon transition-colors">Planes</a>
+                </nav>
+
+                <a href="#planes" class="btn-neon px-5 py-2 rounded-xl text-xs font-bold text-white tracking-wide flex items-center gap-2">
+                    <span>HABLEMOS</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
         </div>
-      </form>
-      
-      <p class="text-xs text-gray-500 text-center mt-6">
-        🔒 Tus datos están seguros • Respuesta en minutos
-      </p>
+    </header>
+
+    <!-- 3. CONTENIDO PRINCIPAL SCROLLING (SECCIONES INTERACTIVAS) -->
+    <main class="max-w-7xl mx-auto px-4 pt-28 pb-16 space-y-36 relative z-10">
+
+        <!-- SECCIÓN 0: HERO PRINCIPAL (NEXO1.png) -->
+        <section id="inicio" data-bg-index="0" class="cinema-section min-h-[85vh] flex flex-col justify-center items-center text-center pt-8">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-purpleNeon/30 text-purpleGlow text-xs font-semibold mb-6">
+                <span class="w-2 h-2 rounded-full bg-cyanNeon animate-pulse"></span>
+                <span>AGENCIA DIGITAL DE ALTA CONVERSIÓN</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-5xl mb-6">
+                DISEÑAMOS EXPERIENCIAS. <br>
+                <span class="bg-gradient-to-r from-purpleGlow via-cyanNeon to-white bg-clip-text text-transparent">CREAMOS NEGOCIOS.</span> <br>
+                IMPULSAMOS TU ÉXITO.
+            </h1>
+
+            <p class="text-gray-300 text-xs md:text-sm max-w-2xl mb-10 font-normal leading-relaxed">
+                Landing pages que convierten, tiendas online que venden y e-commerce que escalan tu marca al siguiente nivel.
+            </p>
+
+            <!-- Imagen Interactiva Hero Showcase -->
+            <div onclick="openImageZoom('NEXO1.png', 'Visión General Nexo-Art')" class="showcase-frame w-full max-w-5xl mb-12 group">
+                <img src="NEXO1.png" alt="Nexo Art Showcase" class="w-full h-auto object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity"></div>
+                <div class="absolute bottom-4 left-6 flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-full bg-cyanNeon/20 border border-cyanNeon/50 text-cyanNeon text-[10px] font-bold uppercase">
+                        <i class="fa-solid fa-expand mr-1"></i> AMPLIAR MOCKUP HQ
+                    </span>
+                </div>
+            </div>
+
+            <!-- Tecnologías Integradas -->
+            <div class="glass-panel p-6 rounded-2xl w-full max-w-4xl border border-slate-800">
+                <p class="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-4">TECNOLOGÍA QUE UTILIZAMOS</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 text-gray-300 text-sm font-semibold">
+                    <span class="flex items-center gap-2"><i class="fa-brands fa-shopify text-green-400 text-xl"></i> Shopify</span>
+                    <span class="flex items-center gap-2"><i class="fa-brands fa-wordpress text-blue-400 text-xl"></i> WordPress</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-cube text-red-400 text-xl"></i> Elementor</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-purple-400 text-xl"></i> WooCommerce</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-code text-cyan-400 text-xl"></i> Webflow</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: LANDING PAGES (NEO2.png) -->
+        <section id="landing-page" data-bg-index="1" class="cinema-section glass-panel rounded-3xl p-8 md:p-12 border border-purpleNeon/30">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purpleNeon/20 border border-purpleNeon/40 text-purpleGlow text-xs font-bold uppercase">
+                        <i class="fa-solid fa-rocket"></i>
+                        <span>SOLUCIÓN 01</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white">LANDING PAGE <br><span class="text-cyanNeon">QUE CONVIERTEN</span></h2>
+                    <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                        Diseñamos páginas estratégicas, rápidas y optimizadas para captar, impactar y convertir visitantes en clientes recurrentes.
+                    </p>
+
+                    <ul class="space-y-3 text-xs md:text-sm text-gray-200">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-cyanNeon"></i>
+                            <span>Diseño 100% personalizado adaptado a tu marca.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-cyanNeon"></i>
+                            <span>Estructura de embudo orientada a la conversión inmediata.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-cyanNeon"></i>
+                            <span>Optimizadas para SEO técnico y velocidad ultrarrápida.</span>
+                        </li>
+                    </ul>
+
+                    <div class="pt-4 flex gap-4">
+                        <button onclick="openLeadModal('PLAN BÁSICO', 'Consultar Cotización')" class="btn-neon px-6 py-3 rounded-xl text-xs font-bold text-white uppercase tracking-wider">
+                            SOLICITAR LANDING
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview NEO2.png -->
+                <div onclick="openImageZoom('NEO2.png', 'Landing Page Architecture')" class="showcase-frame group">
+                    <img src="NEO2.png" alt="Landing Page Architecture" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkBg/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="px-3 py-1 rounded-full bg-purpleNeon/30 border border-purpleNeon/50 text-purpleGlow text-[10px] font-bold uppercase">
+                            <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> VER ARQUITECTURA DETALLADA
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: TIENDAS ONLINE (NEXO3.png) -->
+        <section id="tienda-online" data-bg-index="2" class="cinema-section glass-panel rounded-3xl p-8 md:p-12 border border-cyanNeon/40">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Preview NEXO3.png -->
+                <div onclick="openImageZoom('NEXO3.png', 'E-Commerce Tech Showcase')" class="showcase-frame group order-2 lg:order-1">
+                    <img src="NEXO3.png" alt="E-Commerce Tech Showcase" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkBg/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="px-3 py-1 rounded-full bg-cyanNeon/30 border border-cyanNeon/50 text-cyanNeon text-[10px] font-bold uppercase">
+                            <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> VER DEMO TIENDA VIRTUAL
+                        </span>
+                    </div>
+                </div>
+
+                <div class="space-y-6 order-1 lg:order-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyanNeon/20 border border-cyanNeon/40 text-cyanNeon text-xs font-bold uppercase">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>SOLUCIÓN 02</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white">TIENDAS ONLINE <br><span class="text-purpleGlow">QUE VENDEN</span></h2>
+                    <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                        Diseñamos tiendas online modernas, rápidas y optimizadas para convertir visitantes en clientes fieles con experiencia fluida en smartphone y PC.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <h4 class="font-bold text-white mb-1"><i class="fa-solid fa-shield text-cyanNeon mr-1"></i> Pasarelas Seguras</h4>
+                            <p class="text-gray-400 text-[11px]">Mercado Pago, Stripe y tarjetas integradas.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <h4 class="font-bold text-white mb-1"><i class="fa-solid fa-boxes-stacked text-purpleGlow mr-1"></i> Stock Inteligente</h4>
+                            <p class="text-gray-400 text-[11px]">Control total de inventario y pedidos.</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="openLeadModal('PLAN AVANZADO', 'Consultar Cotización')" class="btn-neon px-6 py-3 rounded-xl text-xs font-bold text-white uppercase tracking-wider">
+                            CREAR TIENDA VIRTUAL
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: E-COMMERCE RESTAURANTES & GASTRONOMÍA (NEXO4.png) -->
+        <section id="restaurante" data-bg-index="3" class="cinema-section glass-panel rounded-3xl p-8 md:p-12 border border-amber-500/40">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-bold uppercase">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>GASTRONOMÍA & PEDIDOS</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white">MENÚ DIGITAL & <br><span class="text-amber-400">PEDIDOS ONLINE</span></h2>
+                    <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                        Sistema integral para restaurantes: menú interactivo por categorías, carrito inteligente, integración con delivery y recepción de pedidos directo en WhatsApp o panel.
+                    </p>
+
+                    <ul class="space-y-3 text-xs md:text-sm text-gray-200">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-amber-400"></i>
+                            <span>Menú digital avanzado con fotos, categorías y adiciones.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-amber-400"></i>
+                            <span>Programación de pedidos para retiro o entrega en domicilio.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-amber-400"></i>
+                            <span>Gestión de pedidos en tiempo real para la cocina.</span>
+                        </li>
+                    </ul>
+
+                    <div class="pt-2">
+                        <button onclick="openLeadModal('PLAN RESTAURANTE', 'Consultar Cotización Gastronomía')" class="bg-gradient-to-r from-amber-500 to-orange-600 px-6 py-3 rounded-xl text-xs font-bold text-white uppercase tracking-wider shadow-lg shadow-orange-900/40 hover:scale-105 transition-all">
+                            COTIZAR MENU DIGITAL
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview NEXO4.png -->
+                <div onclick="openImageZoom('NEXO4.png', 'Restaurante Menu Digital')" class="showcase-frame group">
+                    <img src="NEXO4.png" alt="Restaurante Menu Digital" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkBg/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/30 border border-amber-500/50 text-amber-300 text-[10px] font-bold uppercase">
+                            <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> AMPLIAR SISTEMA DE PEDIDOS
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CATÁLOGOS ESPECIALIZADOS - MOTOPARTES (NEXO5.png) -->
+        <section id="motopartes" data-bg-index="4" class="cinema-section glass-panel rounded-3xl p-8 md:p-12 border border-indigo-500/40">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Preview NEXO5.png -->
+                <div onclick="openImageZoom('NEXO5.png', 'E-Commerce Moto Parts')" class="showcase-frame group order-2 lg:order-1">
+                    <img src="NEXO5.png" alt="E-Commerce Moto Parts" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkBg/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="px-3 py-1 rounded-full bg-indigo-500/30 border border-indigo-500/50 text-indigo-300 text-[10px] font-bold uppercase">
+                            <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> AMPLIAR E-COMMERCE INDUSTRIAL
+                        </span>
+                    </div>
+                </div>
+
+                <div class="space-y-6 order-1 lg:order-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-400 text-xs font-bold uppercase">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>CATÁLOGOS E-COMMERCE</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white">BÚSQUEDA Y <br><span class="text-indigo-400">COMPATIBILIDAD</span></h2>
+                    <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                        Desarrollamos tiendas especializadas para repuestos, accesorios o productos complejos con filtros inteligentes por marca, modelo y año.
+                    </p>
+
+                    <div class="space-y-3 text-xs text-gray-200">
+                        <p class="flex items-center gap-2"><i class="fa-solid fa-sliders text-indigo-400"></i> Filtros de compatibilidad avanzada de productos.</p>
+                        <p class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-indigo-400"></i> Cálculo automatizado de envíos según código postal.</p>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="openLeadModal('PLAN E-COMMERCE CUSTOM', 'Consultar Cotización E-Commerce')" class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 rounded-xl text-xs font-bold text-white uppercase tracking-wider shadow-lg shadow-indigo-900/40 hover:scale-105 transition-all">
+                            CREAR CATÁLOGO ESPECIALIZADO
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: PLANES Y PRECIOS DINÁMICOS -->
+        <section id="planes" class="cinema-section space-y-10">
+            <div class="text-center space-y-3">
+                <span class="text-cyanNeon text-xs font-bold tracking-widest uppercase">TARIFARIO REGIONAL</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white">PLANES Y PRECIOS <span class="text-purpleGlow">TRANSPARENTES</span></h2>
+                <p class="text-gray-400 text-xs md:text-sm max-w-xl mx-auto">Selecciona tu región para ver la tarifa vigente en tu moneda local.</p>
+
+                <!-- Selector de Región -->
+                <div class="flex justify-center items-center gap-3 pt-4">
+                    <button id="btn-arg" onclick="switchRegion('ARG')" class="px-5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-purpleNeon text-white border-purpleNeon shadow-lg shadow-purpleNeon/30">
+                        <span>🇦🇷 Argentina (ARS)</span>
+                    </button>
+                    <button id="btn-latam" onclick="switchRegion('LATAM')" class="px-5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-800 text-gray-400 border-slate-700 hover:text-white">
+                        <span>🌎 Resto LATAM (USD)</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="pricing-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Inyectado por JS -->
+            </div>
+
+            <!-- Pasarelas Aceptadas -->
+            <div class="glass-panel p-6 rounded-2xl flex flex-wrap items-center justify-between gap-4 border border-slate-800">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-shield-halved text-cyanNeon text-2xl"></i>
+                    <div>
+                        <h4 class="text-xs font-bold text-white">Pagos 100% Protegidos</h4>
+                        <p class="text-[10px] text-gray-400">Aceptamos múltiples métodos internacionales.</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-4 text-xs text-gray-300 font-semibold">
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800"><i class="fa-solid fa-bolt text-blue-400 mr-1.5"></i>Mercado Pago</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800"><i class="fa-solid fa-building-columns text-green-400 mr-1.5"></i>Transferencia Bancaria</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800"><i class="fa-brands fa-paypal text-indigo-400 mr-1.5"></i>PayPal</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800"><i class="fa-solid fa-globe text-cyan-400 mr-1.5"></i>Global66</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="cinema-section text-center space-y-6 pt-12 border-t border-slate-800/80">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purpleNeon to-cyanNeon flex items-center justify-center text-white font-extrabold text-2xl mx-auto shadow-xl">
+                N
+            </div>
+            <h3 class="text-xl font-bold text-white">NEXO-ART DIGITAL AGENCY</h3>
+            <p class="text-gray-400 text-xs max-w-md mx-auto leading-relaxed">
+                Diseño web de alta gama, optimización para motores de búsqueda y arquitecturas enfocadas en maximizar ventas.
+            </p>
+            <p class="text-[10px] text-gray-500 pt-6">
+                &copy; 2026 NEXO-ART. Todos los derechos reservados.
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- 4. OVERLAYS Y MODALES -->
+
+    <!-- MODAL ZOOM DE IMÁGENES MOCKUPS -->
+    <div id="image-zoom-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/90 backdrop-blur-2xl hidden transition-all duration-300" onclick="closeImageZoom()">
+        <div class="relative max-w-6xl w-full p-2" onclick="event.stopPropagation()">
+            <button onclick="closeImageZoom()" class="absolute -top-10 right-0 text-white hover:text-cyanNeon text-2xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="zoom-img-target" src="" alt="Zoom Mockup" class="w-full h-auto max-h-[85vh] object-contain rounded-2xl border border-purpleNeon/40 shadow-2xl">
+            <p id="zoom-img-title" class="text-center text-xs font-bold text-gray-300 mt-3"></p>
+        </div>
     </div>
-  </div>
 
-  <!-- 🤖 MODAL DEL ASISTENTE NOTEBOOKLM -->
-  <div id="notebookModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="notebookModalTitle">
-    <div class="glass p-6 sm:p-8 rounded-3xl border border-primary/50 max-w-md w-full animate-slideDown relative">
-      <!-- Header del Modal -->
-      <div class="flex justify-between items-center mb-6">
-        <h3 id="notebookModalTitle" class="text-xl sm:text-2xl font-black gradient-text flex items-center gap-2">
-          <span>🤖</span> Asistente NEXO-Art
-        </h3>
-        <button onclick="cerrarNotebookModal()" class="text-gray-400 hover:text-white transition text-3xl font-bold leading-none" aria-label="Cerrar asistente">&times;</button>
-      </div>
-      
-      <!-- Enlace para abrir en pestaña nueva -->
-      <div class="text-center">
-        <a href="https://notebooklm.google.com/notebook/8b4f5d92-7e6f-471c-bfdf-5c0de7da2a38/preview" target="_blank" 
-           class="inline-block px-6 py-4 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-lg rounded-2xl hover:scale-105 transition shadow-xl focus:outline-none focus:ring-2 focus:ring-primary">
-          Abrir en pestaña nueva
-        </a>
-      </div>
-      
-      <p class="text-xs text-gray-500 text-center mt-6">
-        💡 Preguntame sobre planes, precios, métodos de pago o cualquier duda de NEXO-Art.
-      </p>
+    <!-- MODAL CAPTURA DE LEADS (META BUSINESS AGENT) -->
+    <div id="lead-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/80 backdrop-blur-xl hidden transition-all duration-300">
+        <div class="glass-panel max-w-lg w-full rounded-3xl p-6 md:p-8 border border-cyanNeon/40 relative shadow-2xl">
+            <button onclick="closeLeadModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6 space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyanNeon/20 border border-cyanNeon/40 text-cyanNeon text-[10px] font-bold uppercase">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>META BUSINESS AGENT</span>
+                </div>
+                <h3 id="modal-plan-title" class="text-2xl font-extrabold text-white">CONTRATAR PLAN</h3>
+                <p id="modal-plan-price" class="text-sm font-semibold text-cyanNeon"></p>
+            </div>
+
+            <form id="lead-form" onsubmit="handleLeadSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">NOMBRE Y APELLIDO *</label>
+                    <input type="text" id="lead-name" required placeholder="Tu nombre completo"
+                        class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-cyanNeon transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">CORREO ELECTRÓNICO *</label>
+                    <input type="email" id="lead-email" required placeholder="tuemail@ejemplo.com"
+                        class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-cyanNeon transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">CUÉNTANOS TU IDEA O PROYECTO *</label>
+                    <textarea id="lead-idea" rows="3" required placeholder="Describe brevemente lo que necesitas para tu sitio web..."
+                        class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-cyanNeon transition-colors resize-none"></textarea>
+                </div>
+
+                <div class="p-3 rounded-xl bg-purple-950/40 border border-purpleNeon/30 text-[10px] text-gray-300 flex items-start gap-3">
+                    <i class="fa-solid fa-circle-info text-cyanNeon text-sm shrink-0 mt-0.5"></i>
+                    <p class="leading-relaxed">
+                        <strong class="text-white">META BUSINESS AGENT:</strong> Al presionar enviar serás redirigido a WhatsApp para continuar la contratación de forma inmediata.
+                    </p>
+                </div>
+
+                <button type="submit" class="w-full btn-neon py-3.5 rounded-xl text-xs font-bold text-white tracking-wider uppercase flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>CONTINUAR EN WHATSAPP</span>
+                </button>
+            </form>
+        </div>
     </div>
-  </div>
 
-  <!-- 🎨 FONDO DE PARTÍCULAS -->
-  <div id="particles-js"></div>
-
-  <!-- 🌟 SECCIÓN HERO -->
-  <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
-    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25">
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-large.mp4" type="video/mp4">
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-matrix-rain-and-digital-glitch-32694-medium.mp4" type="video/mp4">
-    </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-[#050511]/95 to-[#050511]"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,240,255,0.1)_0%,_transparent_70%)]"></div>
-
-    <div class="relative z-10 text-center max-w-7xl mx-auto px-2">
-      <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full mb-6 sm:mb-8 animate-float">
-        <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-        <span class="text-sm text-gray-300">✨ Landings que facturan 24/7</span>
-      </div>
-      
-      <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-tight sm:leading-none mb-6 sm:mb-10 text-shadow">
-        TU LANDING<br><span class="gradient-text">FACTURA SOLA</span>
-      </h1>
-      
-      <p class="text-lg sm:text-2xl md:text-4xl font-bold text-gray-200 mb-8 sm:mb-12 px-2 max-w-4xl mx-auto">
-        100% estática • carga en menos de 0.8s • Clasifica tus leads automáticamente
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <button onclick="abrirModal('Avanzado')" class="px-8 sm:px-12 py-4 sm:py-5 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-2xl btn-glow">
-          EMPEZAR AHORA →
-        </button>
-        <a href="#planes" class="px-8 sm:px-12 py-4 sm:py-5 glass border border-white/30 rounded-2xl font-bold hover:bg-white/10 transition text-lg sm:text-xl">
-          Ver Planes ↓
-        </a>
-      </div>
-      
-      <div class="mt-12 sm:mt-16 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
-        <div class="flex items-center gap-2">
-          <span class="text-accent">✓</span>
-          <span>Sin mensualidades</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-accent">✓</span>
-          <span>Entrega en 24HS</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-accent">✓</span>
-          <span>Soporte incluido</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-      <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-      </svg>
-    </div>
-  </section>
-
-  <!-- 💡 MENSAJE ESTÁTICO -->
-  <section class="py-12 sm:py-16 bg-black/50 backdrop-blur-xl text-center px-4 border-y border-white/5">
-    <p class="text-xl sm:text-2xl md:text-3xl font-black text-primary mb-3 sm:mb-4">
-      Todas nuestras webs son 100% estáticas (HTML + CSS + JS)
-    </p>
-    <p class="text-base sm:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-      Carga instantánea • Puntaje 100/100 Google • Nunca se cae • Sin hosting caro • SEO optimizado
-    </p>
-  </section>
-
-  <!-- 🎬 VIDEO EXPLICATIVO EMBEBIDO -->
-  <section class="py-16 sm:py-24 px-4 sm:px-6 bg-gradient-to-b from-black/30 to-black/50">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 gradient-text">
-        CONOCÉ CÓMO FUNCIONA NEXO-ART
-      </h2>
-      <p class="text-base sm:text-xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto">
-        Mirá nuestro video explicativo directamente aquí y descubrí cómo nuestras landings pueden transformar tu negocio y empezar a facturar automáticamente.
-      </p>
-      
-      <!-- VIDEO DE YOUTUBE -->
-      <div class="relative w-full max-w-4xl mx-auto aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 border border-white/10 glass">
-        <iframe 
-          src="https://www.youtube.com/embed/1tHb9OWXvAI?rel=0&modestbranding=1&playsinline=1" 
-          title="Video explicativo NEXO-ART: Landings que convierten"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen
-          class="absolute inset-0 w-full h-full"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
-      </div>
-      
-      <p class="text-sm text-gray-500 mt-6 flex items-center justify-center gap-2 flex-wrap">
-        <span>⏱️</span>
-        <span>Duración: 3-5 minutos</span>
-        <span class="mx-2 hidden sm:inline">•</span>
-        <span>🔊</span>
-        <span>Activá el sonido para mejor experiencia</span>
-        <span class="mx-2 hidden sm:inline">•</span>
-        <span>📱</span>
-        <span>Compatible con móvil y desktop</span>
-      </p>
-    </div>
-  </section>
-
-  <!-- 💰 PLANES CON PRECIOS DINÁMICOS -->
-  <section id="planes" class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
-    <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2 gradient-text">ELIGÍ TU RESULTADO</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
-
-      <!-- ===== PLAN BÁSICO ===== -->
-      <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col relative">
-        
-        <!-- 🏷️ BADGE 10% OFF (OCULTO PARA ARGENTINA) -->
-        <div id="badge-10off" class="badge-descount absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap z-10 shadow-lg" style="display: none">10% OFF</div>
-        
-        <h3 class="text-2xl sm:text-3xl font-black mb-3 sm:mb-4 leading-tight">BÁSICO<br><span class="text-base sm:text-lg font-medium text-gray-300">PIENSA EN GRANDE PARA PEQUEÑOS NEGOCIOS</span></h3>
-        
-        <div id="price-basico" class="text-4xl sm:text-6xl font-black mb-4 sm:mb-6 price-badge text-shadow">$98.000</div>
-        
-        <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-8 sm:mb-10 flex-grow">
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-accent mt-1">✓</span>
-            <span>Landing 100% estática</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-accent mt-1">✓</span>
-            <span>Diseño premium responsive</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-accent mt-1">✓</span>
-            <span>Formulario de captura</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-accent mt-1">✓</span>
-            <span>Entrega en 24HS</span>
-          </li>
-        </ul>
-        
-        <button onclick="abrirModal('Básico')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition shadow-xl mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-cyan-400">
-          EMPEZAR YA
-        </button>
-      </article>
-
-      <!-- ===== PLAN AVANZADO EMPRESA (DESTACADO) ===== -->
-      <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border-4 border-primary shadow-2xl shadow-primary/60 transform md:scale-110 relative overflow-hidden flex flex-col">
-        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
-        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-primary to-cyan-400 text-black px-4 sm:px-8 py-2 sm:py-3 rounded-full font-black text-sm sm:text-lg whitespace-nowrap shadow-lg z-10">🔥 MÁS VENDIDO</div>
-        
-        <h3 class="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 mt-2 sm:mt-0">Avanzado Empresa</h3>
-        <div id="price-avanzado" class="text-5xl sm:text-7xl font-black text-primary mb-6 sm:mb-8 price-badge text-shadow">$160.000</div>
-        
-        <ul class="text-left space-y-3 sm:space-y-5 text-gray-200 text-base sm:text-lg mb-6 sm:mb-8 flex-grow">
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-primary mt-1">✓</span>
-            <span>Todo lo del Básico</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-primary mt-1">✓</span>
-            <span>Animaciones premium</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-primary mt-1">✓</span>
-            <span>CRM automático</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-primary mt-1">✓</span>
-            <span>Mantenimiento mensual</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-primary mt-1">✓</span>
-            <span>Entrega en 24HS</span>
-          </li>
-        </ul>
-
-        <!-- MICRO TARJETA MANTENIMIENTO MENSUAL -->
-        <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-primary/20 to-cyan-400/20 border-2 border-primary/50 rounded-2xl">
-          <p class="text-sm text-gray-300 mb-1">Mantenimiento Mensual</p>
-          <p id="price-mantenimiento-avanzado" class="text-2xl sm:text-3xl font-black text-primary">$40 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
-        </div>
-        
-        <button onclick="abrirModal('Avanzado')" class="w-full py-5 sm:py-7 bg-primary text-black font-black text-xl sm:text-2xl rounded-2xl hover:bg-white transform hover:scale-105 transition shadow-2xl mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-primary">
-          RESERVAR MI AVANZADO
-        </button>
-      </article>
-
-      <!-- ===== PLAN PREMIUM ===== -->
-      <article class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-secondary/50 hover:border-secondary transition text-center flex flex-col">
-        <h3 class="text-3xl sm:text-4xl font-black mb-3 sm:mb-4">Premium</h3>
-        <p class="text-xs sm:text-sm text-secondary font-bold mb-2 uppercase tracking-wider">E-commerce + Ecosistema de Venta Autónoma (NEXO-ART)</p>
-        <div id="price-premium" class="text-4xl sm:text-6xl font-black text-secondary mb-6 sm:mb-8 price-badge text-shadow">$430.000</div>
-        
-        <ul class="text-left space-y-3 sm:space-y-5 text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 flex-grow">
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-secondary mt-1">✓</span>
-            <span>Todo lo del Avanzado</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-secondary mt-1">✓</span>
-            <span>E-commerce completo</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-secondary mt-1">✓</span>
-            <span>Ecosistema de Venta Autónoma (NEXO-ART)</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-secondary mt-1">✓</span>
-            <span>Web completa full custom</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-secondary mt-1">✓</span>
-            <span>SEO técnico avanzado</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-secondary mt-1">✓</span>
-            <span>Mantenimiento mensual</span>
-          </li>
-          <li class="leading-relaxed flex items-start gap-3">
-            <span class="text-secondary mt-1">✓</span>
-            <span>Entrega en 24HS</span>
-          </li>
-        </ul>
-
-        <!-- MICRO TARJETA MANTENIMIENTO MENSUAL -->
-        <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-secondary/20 to-pink-500/20 border-2 border-secondary/50 rounded-2xl">
-          <p class="text-sm text-gray-300 mb-1">Mantenimiento Mensual</p>
-          <p id="price-mantenimiento-premium" class="text-2xl sm:text-3xl font-black text-secondary">$40 USD<span class="text-sm text-gray-400 font-normal">/mes</span></p>
-        </div>
-        
-        <button onclick="abrirModal('Premium')" class="w-full py-4 sm:py-6 bg-gradient-to-r from-secondary to-pink-500 text-black font-black text-lg sm:text-xl rounded-2xl hover:scale-105 transition mt-auto btn-glow focus:outline-none focus:ring-2 focus:ring-secondary">
-          DOMINAR MI MERCADO
-        </button>
-      </article>
-    </div>
-    
-    <!-- Nota de precios -->
-    <p class="text-center text-gray-500 text-sm mt-12 max-w-2xl mx-auto">
-      💡 <strong>Nota:</strong> Los precios en USD para Latinoamérica se pagan vía transferencia internacional, PayPal o criptomonedas. 
-      Argentina: precios en pesos.
-    </p>
-  </section>
-
-  <!-- 🎨 SECCIÓN: TRABAJOS REALIZADOS -->
-  <section class="py-20 sm:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
-    <h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-center mb-12 sm:mb-20 px-2 gradient-text">TRABAJOS REALIZADOS</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
-      
-      <!-- PROYECTO 1: ROTISERIA MALVINAS -->
-      <a href="https://nexoar-art.github.io/ROTISERIA-MALVINAS/" target="_blank" rel="noopener noreferrer" 
-         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-orange-700 to-red-900 flex items-center justify-center">
-          <span class="text-5xl">🍗</span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">ROTISERÍA MALVINAS</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Landing page para rotisería • Pedidos online • Captura de clientes locales</p>
-        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
-          VER PROYECTO →
-        </span>
-      </a>
-
-      <!-- PROYECTO 2: TONGOY -->
-      <a href="https://nexoar-art.github.io/TONGOY/" target="_blank" rel="noopener noreferrer" 
-         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-600 to-blue-900 flex items-center justify-center">
-          <span class="text-5xl">🏖️</span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">TONGOY</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Sitio turístico y de servicios • Diseño moderno • Optimizado para búsquedas</p>
-        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
-          VER PROYECTO →
-        </span>
-      </a>
-
-      <!-- PROYECTO 3: AUXILIO DE CAMIONES DOLORES SORIANO -->
-      <a href="https://nexoar-art.github.io/AXILIO-DE-CAMIONES-DOLORES-SORIANO/" target="_blank" rel="noopener noreferrer" 
-         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-          <span class="text-5xl">🚛</span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">AUXILIO DE CAMIONES DOLORES SORIANO</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Servicio de auxilio vial • Diseño profesional • Captura de clientes 24/7</p>
-        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
-          VER PROYECTO →
-        </span>
-      </a>
-
-      <!-- PROYECTO 4: TALLER VICAN GNC FC RACING TUNE MOTOS -->
-      <a href="https://nexoar-art.github.io/TALLER-VICAN-GNC-FC-RACING-TUNE-MOTOS/" target="_blank" rel="noopener noreferrer" 
-         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center">
-          <span class="text-5xl">🔧</span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">TALLER VICAN GNC / TUNE MOTOS</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Taller mecánico multi-servicio • GNC • Customización de motos</p>
-        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
-          VER PROYECTO →
-        </span>
-      </a>
-
-      <!-- PROYECTO 5: FC RACING -->
-      <a href="https://fc-racing.vercel.app/" target="_blank" rel="noopener noreferrer" 
-         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-red-700 to-black flex items-center justify-center">
-          <span class="text-5xl">🏎️</span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">FC RACING</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Equipo de competición • Diseño deportivo de alto impacto • Presencia profesional</p>
-        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
-          VER PROYECTO →
-        </span>
-      </a>
-
-      <!-- PROYECTO 6: CASA EN ALQUILER CÓRDOBA -->
-      <a href="https://nexoar-art.github.io/casa-en-alquiler-cordoba/" target="_blank" rel="noopener noreferrer" 
-         class="plan-card glass p-6 sm:p-8 md:p-12 rounded-3xl border border-white/10 hover:border-primary/50 transition text-center flex flex-col group">
-        <div class="w-full aspect-video mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-emerald-700 to-teal-900 flex items-center justify-center">
-          <span class="text-5xl">🏠</span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-black mb-4 group-hover:text-primary transition">CASA EN ALQUILER CÓRDOBA</h3>
-        <p class="text-gray-300 text-base sm:text-lg mb-6 flex-grow">Inmobiliaria / Alquiler temporal • Galería de fotos • Reservas directas</p>
-        <span class="inline-block py-3 px-6 bg-gradient-to-r from-primary to-cyan-400 text-black font-black rounded-2xl group-hover:scale-105 transition">
-          VER PROYECTO →
-        </span>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- 🚀 CTA FINAL -->
-  <section class="py-16 sm:py-24 px-4 sm:px-6 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h3 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 gradient-text">¿Listo para que tu landing facture sola?</h3>
-      <p class="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-10">No esperes más. Tu competencia ya está convirtiendo visitantes en clientes.</p>
-      <button onclick="abrirModal('Avanzado')" class="px-10 sm:px-20 py-6 sm:py-8 bg-gradient-to-r from-primary to-cyan-400 text-black font-black text-xl sm:text-2xl rounded-3xl hover:scale-105 transform transition shadow-2xl w-full sm:w-auto animate-pulseBtn btn-glow focus:outline-none focus:ring-2 focus:ring-primary">
-        EMPEZAR YA →
-      </button>
-      <p class="text-sm text-gray-500 mt-4">Sin compromiso • Respuesta en minutos • Pago seguro</p>
-    </div>
-  </section>
-
-  <!-- 💳 MÉTODOS DE PAGO SEGUROS -->
-  <section class="py-12 px-4 sm:px-6 border-t border-white/10 bg-gradient-to-b from-black/50 to-transparent">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-center text-gray-400 text-sm mb-8 font-medium tracking-wide">
-        🔒 PAGOS 100% SEGUROS Y ENCRIPTADOS
-      </p>
-      <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-16">
-        <!-- Mercado Pago -->
-        <div class="flex flex-col items-center gap-3 group cursor-pointer">
-          <div class="payment-card w-40 h-16 bg-white rounded-xl flex items-center justify-center p-4 shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-            <img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.1/mercadolibre/logo__small.png" 
-                 alt="Mercado Pago" 
-                 class="h-full object-contain transition-opacity duration-300"
-                 onerror="this.parentElement.innerHTML='<span class=\'text-blue-600 font-black text-xl\'>MercadoPago</span>'">
-            <span class="hover-text">MERCADO PAGO</span>
-          </div>
-          <span class="text-xs text-gray-500">Argentina</span>
-        </div>
-
-        <!-- PayPal -->
-        <div class="flex flex-col items-center gap-3 group cursor-pointer">
-          <div class="payment-card w-40 h-16 bg-white rounded-xl flex items-center justify-center p-4 shadow-lg shadow-blue-600/20 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" 
-                 alt="PayPal" 
-                 class="h-full object-contain transition-opacity duration-300"
-                 onerror="this.parentElement.innerHTML='<span class=\'text-blue-700 font-black text-xl\'>PayPal</span>'">
-            <span class="hover-text">PAYPAL</span>
-          </div>
-          <span class="text-xs text-gray-500">Internacional</span>
-        </div>
-
-        <!-- Global66 -->
-        <div class="flex flex-col items-center gap-3 group cursor-pointer">
-          <div class="payment-card w-40 h-16 bg-white rounded-xl flex items-center justify-center p-4 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-            <img src="GLOBAL66.png" 
-                 alt="Global66" 
-                 class="h-full object-contain transition-opacity duration-300"
-                 onerror="this.parentElement.innerHTML='<span class=\'text-purple-600 font-black text-xl\'>Global66</span>'">
-            <span class="hover-text">GLOBAL66</span>
-          </div>
-          <span class="text-xs text-gray-500">Latam</span>
-        </div>
-      </div>
-      
-      <div class="mt-8 text-center">
-        <p class="text-xs text-gray-500 flex items-center justify-center gap-2 flex-wrap">
-          <span>✓</span>
-          <span>Transferencias bancarias</span>
-          <span class="mx-2">•</span>
-          <span>Criptomonedas (USDT/BTC)</span>
-          <span class="mx-2">•</span>
-          <span>Tarjetas de crédito/débito</span>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 📞 BOTONES FLOTANTES DE CONTACTO -->
-  
-  <!-- 🤖 BOTÓN FLOTANTE ASISTENTE NOTEBOOKLM - Lado izquierdo -->
-  <button onclick="abrirNotebookModal()" 
-     class="fixed bottom-24 left-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-primary to-cyan-400 hover:from-cyan-400 hover:to-primary rounded-full shadow-2xl shadow-primary/40 transition-all duration-300 hover:scale-110 group animate-float"
-     aria-label="Abrir Asistente NEXO-Art" title="Abrir Asistente NEXO-Art">
-    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-    </svg>
-    <span class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-white/20">
-      💬 Asistente NEXO-Art
-    </span>
-  </button>
-
-  <!-- WhatsApp EMERGENCIA 3834689137 - Lado izquierdo -->
-  <a href="https://api.whatsapp.com/send?phone=543834689137&text=🚨%20EMERGENCIA%20NEXO-Art:%20Necesito%20asistencia%20inmediata.%20Mi%20nombre%20es:" target="_blank" rel="noopener noreferrer"
-     class="fixed bottom-6 left-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] hover:bg-[#128C7E] rounded-xl sm:rounded-2xl shadow-2xl shadow-[#25D366]/40 transition-all duration-300 hover:scale-110 group border-2 border-white/30"
-     aria-label="WhatsApp EMERGENCIA: 3834689137" title="WhatsApp EMERGENCIA: 3834689137">
-    <div class="relative w-full h-full flex items-center justify-center">
-      <svg class="w-8 h-8 sm:w-9 sm:h-9 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-      </svg>
-      <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-sm border border-white/50 animate-pulse">!</span>
-    </div>
-    <span class="absolute -top-12 left-1/2 -translate-x-1/2 bg-red-600/95 text-white text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-white/30 shadow-lg">
-      🚨 EMERGENCIA: 3834689137
-    </span>
-  </a>
-
-  <!-- LinkedIn - Lado derecho -->
-  <a href="https://www.linkedin.com/in/nexo-art-591a64389/" target="_blank" rel="noopener noreferrer"
-     class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#0077B5] hover:bg-[#005885] rounded-full shadow-2xl shadow-[#0077B5]/40 transition-all duration-300 hover:scale-110 group"
-     aria-label="Contáctanos por LinkedIn" title="Contáctanos por LinkedIn">
-    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-    </svg>
-    <span class="absolute -top-10 right-0 bg-black/90 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-white/20">
-      LinkedIn
-    </span>
-  </a>
-
-  <!-- WhatsApp Principal: 3489686939 - Lado derecho -->
-  <a href="https://api.whatsapp.com/send?phone=543489686939&text=Hola%20NEXO-Art!%20Quiero%20más%20información%20sobre%20sus%20servicios." target="_blank" rel="noopener noreferrer"
-     class="fixed bottom-24 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] hover:bg-[#128C7E] rounded-full shadow-2xl shadow-[#25D366]/40 transition-all duration-300 hover:scale-110 group"
-     aria-label="WhatsApp: 3489686939" title="WhatsApp: 3489686939">
-    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-    </svg>
-    <span class="absolute -top-10 right-0 bg-black/90 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-white/20">
-      WhatsApp: 3489686939
-    </span>
-  </a>
-
-  <!-- Telegram: +543489686939 - Lado derecho -->
-  <a href="https://t.me/+543489686939" target="_blank" rel="noopener noreferrer"
-     class="fixed bottom-42 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#0088cc] hover:bg-[#006699] rounded-full shadow-2xl shadow-[#0088cc]/40 transition-all duration-300 hover:scale-110 group"
-     aria-label="Telegram: +543489686939" title="Telegram: +543489686939">
-    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-    </svg>
-    <span class="absolute -top-10 right-0 bg-black/90 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-white/20">
-      Telegram: +543489686939
-    </span>
-  </a>
-
-  <!-- ⚙️ SCRIPT COMPLETO CON TODA LA LÓGICA -->
-  <script>
-    // ============================================
-    // 🌍 CONFIGURACIÓN DE PRECIOS POR PAÍS (ACTUALIZADO)
-    // ============================================
-    const preciosPorPais = {
-      argentina: {
-        basico: { 
-          precio: "$98.000", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160.000", mantenimiento: "$40 USD" },
-        premium: { precio: "$430.000", mantenimiento: "$40 USD" }
-      },
-      bolivia: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      brasil: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      chile: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      colombia: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      costarica: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      cuba: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      ecuador: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      elsalvador: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      guatemala: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      honduras: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      mexico: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      nicaragua: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      panama: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      paraguay: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      peru: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      rd: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      uruguay: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      },
-      venezuela: {
-        basico: { 
-          precio: "$90 USD", 
-          mostrarDescuento: false
-        },
-        avanzado: { precio: "$160 USD", mantenimiento: "$40 USD" },
-        premium: { precio: "$290 USD", mantenimiento: "$40 USD" }
-      }
-    };
-
-    let paisActual = 'argentina';
-
-    // ============================================
-    // 🔄 FUNCIÓN: CAMBIAR PAÍS Y ACTUALIZAR UI
-    // ============================================
-    function cambiarPais() {
-      const selector = document.getElementById('countrySelector');
-      const nuevoPais = selector.value;
-      
-      // Evitar recarga innecesaria
-      if (nuevoPais === paisActual) return;
-      
-      paisActual = nuevoPais;
-      const precios = preciosPorPais[paisActual];
-      
-      // Animación y actualización de precios
-      ['basico', 'avanzado', 'premium'].forEach(plan => {
-        const el = document.getElementById(`price-${plan}`);
-        if (el) {
-          el.classList.add('price-change');
-          setTimeout(() => {
-            el.textContent = precios[plan].precio;
-            el.classList.remove('price-change');
-          }, 200);
-        }
-      });
-      
-      // Actualizar precios de mantenimiento
-      const mantAvanzado = document.getElementById('price-mantenimiento-avanzado');
-      const mantPremium = document.getElementById('price-mantenimiento-premium');
-      if (mantAvanzado) {
-        mantAvanzado.innerHTML = `${precios.avanzado.mantenimiento}<span class="text-sm text-gray-400 font-normal">/mes</span>`;
-      }
-      if (mantPremium) {
-        mantPremium.innerHTML = `${precios.premium.mantenimiento}<span class="text-sm text-gray-400 font-normal">/mes</span>`;
-      }
-      
-      // 🏷️ MOSTRAR/OCULTAR BADGE "10% OFF"
-      const badge10off = document.getElementById('badge-10off');
-      if (badge10off) {
-        if (precios.basico.mostrarDescuento) {
-          badge10off.style.display = 'block';
-        } else {
-          badge10off.style.display = 'none';
-        }
-      }
-      
-      // Actualizar campo oculto del modal
-      document.getElementById('modalPais').value = paisActual;
-      
-      // Guardar preferencia en localStorage
-      try {
-        localStorage.setItem('nexoar-pais', paisActual);
-      } catch(e) {
-        console.log('localStorage no disponible');
-      }
-      
-      // Feedback visual al usuario
-      mostrarNotificacion(`🌎 Precios actualizados para ${selector.options[selector.selectedIndex].text}`);
-    }
-
-    // ============================================
-    // 💬 FUNCIÓN: ABRIR MODAL FORMULARIO
-    // ============================================
-    function abrirModal(plan) {
-      document.getElementById('modalPlan').value = plan;
-      document.getElementById('modalPais').value = paisActual;
-      document.getElementById('whatsappModal').classList.remove('hidden');
-      document.getElementById('modalNombre').focus();
-      
-      // Prevenir scroll del body
-      document.body.style.overflow = 'hidden';
-    }
-
-    // ============================================
-    // ❌ FUNCIÓN: CERRAR MODAL
-    // ============================================
-    function cerrarModal() {
-      document.getElementById('whatsappModal').classList.add('hidden');
-      document.body.style.overflow = '';
-      
-      // Limpiar formulario
-      document.getElementById('whatsappForm').reset();
-    }
-
-    // ============================================
-    // 📤 FUNCIÓN: ENVIAR A WHATSAPP
-    // ============================================
-    function enviarWhatsApp() {
-      const nombre = document.getElementById('modalNombre').value.trim();
-      const email = document.getElementById('modalEmail').value.trim();
-      const idea = document.getElementById('modalIdea').value.trim();
-      const plan = document.getElementById('modalPlan').value;
-      const pais = document.getElementById('modalPais').value || paisActual;
-
-      // Validación
-      if (!nombre) {
-        alert("⚠️ Por favor, ingresá tu nombre para continuar");
-        document.getElementById('modalNombre').focus();
-        return;
-      }
-
-      // Mensajes personalizados por plan y país
-      const precios = preciosPorPais[pais];
-      const mensajes = {
-        "Básico": `🚀 *Hola NEXO-Art!* Me llamo *${nombre}* y quiero el plan *BÁSICO - PIENSA EN GRANDE PARA PEQUEÑOS NEGOCIOS* por *${precios.basico.precio}*. ¡Empecemos ya!`,
-        "Avanzado": `🚀 *Hola NEXO-Art!* Soy *${nombre}* y quiero el plan *AVANZADO EMPRESA* por *${precios.avanzado.precio}* + mantenimiento mensual *${precios.avanzado.mantenimiento}*. ¡Es el más vendido y necesito que mi landing facture sola!`,
-        "Premium": `🚀 *Hola NEXO-Art!* Mi nombre es *${nombre}* y quiero el plan *PREMIUM (E-commerce + Ecosistema de Venta Autónoma)* por *${precios.premium.precio}* + mantenimiento mensual *${precios.premium.mantenimiento}*. ¡Quiero dominar mi mercado!`
-      };
-
-      let mensaje = mensajes[plan] || mensajes["Avanzado"];
-      if (email) mensaje += `\n📧 Email: ${email}`;
-      if (idea) mensaje += `\n💡 *Mi idea:* ${idea}`;
-      mensaje += `\n🌍 País: ${pais.charAt(0).toUpperCase() + pais.slice(1)}`;
-
-      const textoFinal = encodeURIComponent(mensaje);
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=+543489686939&text=${textoFinal}`;
-      
-      // Abrir WhatsApp en nueva pestaña
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      
-      // Cerrar modal y feedback
-      cerrarModal();
-      mostrarNotificacion('✅ ¡Mensaje enviado! Te contactaremos en breve');
-    }
-
-    // ============================================
-    // 🔔 FUNCIÓN: MOSTRAR NOTIFICACIÓN TEMPORAL
-    // ============================================
-    function mostrarNotificacion(mensaje) {
-      // Crear elemento de notificación
-      const notif = document.createElement('div');
-      notif.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-6 py-4 glass border border-accent/50 rounded-2xl text-accent font-medium shadow-2xl animate-slideDown';
-      notif.style.maxWidth = '90%';
-      notif.style.textAlign = 'center';
-      notif.innerHTML = mensaje;
-      
-      document.body.appendChild(notif);
-      
-      // Eliminar después de 4 segundos
-      setTimeout(() => {
-        notif.style.opacity = '0';
-        notif.style.transform = 'translateY(-20px)';
-        notif.style.transition = 'all 0.3s ease';
-        setTimeout(() => notif.remove(), 300);
-      }, 4000);
-    }
-
-    // ============================================
-    // 🤖 FUNCIONES DEL ASISTENTE NOTEBOOKLM
-    // ============================================
-    function abrirNotebookModal() {
-      const modal = document.getElementById('notebookModal');
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function cerrarNotebookModal() {
-      const modal = document.getElementById('notebookModal');
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    // ============================================
-    // 🎨 INICIALIZAR PARTÍCULAS
-    // ============================================
-    function inicializarParticulas() {
-      if (typeof particlesJS !== 'undefined') {
-        particlesJS("particles-js", {
-          particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: "#00F0FF" },
-            shape: { type: "circle" },
-            opacity: { value: 0.4, random: true },
-            size: { value: 3, random: true },
-            line_linked: {
-              enable: true,
-              distance: 150,
-              color: "#00F0FF",
-              opacity: 0.2,
-              width: 1
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        // DATOS EXACTOS DE TARIFAS
+        const PRICING_DATA = {
+            ARG: {
+                flag: '🇦🇷',
+                currencyName: 'Argentina - ARS',
+                symbol: '$',
+                suffix: 'ARS',
+                plans: [
+                    {
+                        name: 'PLAN BÁSICO',
+                        price: '98.000',
+                        badge: null,
+                        features: ['Landing 100% estática', 'Diseño premium responsive', 'Formulario de captura de leads', 'Entrega en 24hs']
+                    },
+                    {
+                        name: 'PLAN AVANZADO',
+                        price: '160.000',
+                        badge: 'MÁS VENDIDO',
+                        features: ['Todo lo del Básico', 'Animaciones premium', 'CRM automático', 'Mantenimiento mensual ($30 USD/mes)', 'Entrega en 24hs']
+                    },
+                    {
+                        name: 'PLAN PREMIUM',
+                        price: '430.000',
+                        badge: null,
+                        features: ['Todo lo del Avanzado', 'Web completa full custom - E-commerce', 'SEO técnico avanzado', 'Mantenimiento mensual ($40 USD/mes)', 'Entrega en 24hs']
+                    }
+                ]
             },
-            move: {
-              enable: true,
-              speed: 2,
-              direction: "none",
-              random: true,
-              straight: false,
-              out_mode: "out",
-              bounce: false
+            LATAM: {
+                flag: '🌎',
+                currencyName: 'Resto LATAM - USD',
+                symbol: '$',
+                suffix: 'USD',
+                plans: [
+                    {
+                        name: 'PLAN BÁSICO',
+                        price: '90',
+                        badge: null,
+                        features: ['Landing 100% estática', 'Diseño premium responsive', 'Formulario de captura de leads', 'Entrega en 24hs']
+                    },
+                    {
+                        name: 'PLAN AVANZADO',
+                        price: '160',
+                        badge: 'MÁS VENDIDO',
+                        features: ['Todo lo del Básico', 'Animaciones premium', 'CRM automático', 'Mantenimiento mensual ($30 USD/mes)', 'Entrega en 24hs']
+                    },
+                    {
+                        name: 'PLAN PREMIUM',
+                        price: '290',
+                        badge: null,
+                        features: ['Todo lo del Avanzado', 'Web completa full custom - E-commerce', 'SEO técnico avanzado', 'Mantenimiento mensual ($40 USD/mes)', 'Entrega en 24hs']
+                    }
+                ]
             }
-          },
-          interactivity: {
-            detect_on: "canvas",
-            events: {
-              onhover: { enable: true, mode: "repulse" },
-              onclick: { enable: true, mode: "push" },
-              resize: true
-            }
-          },
-          retina_detect: true
-        });
-      }
-    }
+        };
 
-    // ============================================
-    // 🚀 INICIALIZACIÓN AL CARGAR LA PÁGINA
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-      // 1. Inicializar partículas
-      inicializarParticulas();
-      
-      // 2. Recuperar país guardado (si existe, aplicar sus precios)
-      try {
-        const paisGuardado = localStorage.getItem('nexoar-pais');
-        if (paisGuardado && preciosPorPais[paisGuardado] && paisGuardado !== 'argentina') {
-          const selector = document.getElementById('countrySelector');
-          selector.value = paisGuardado;
-          paisActual = paisGuardado;
-          cambiarPais();
-        }
-      } catch(e) {
-        console.log('localStorage no disponible');
-      }
-      
-      // 3. Cerrar modales con tecla ESC
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          cerrarModal();
-          cerrarNotebookModal();
-        }
-      });
-      
-      // 4. Cerrar modales al hacer clic fuera
-      document.getElementById('whatsappModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-          cerrarModal();
-        }
-      });
-      document.getElementById('notebookModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-          cerrarNotebookModal();
-        }
-      });
-      
-      // 5. Smooth scroll para enlaces internos
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+        const COUNTRIES_LATAM = [
+            { name: 'Argentina', code: 'ARG' },
+            { name: 'Uruguay', code: 'LATAM' },
+            { name: 'Chile', code: 'LATAM' },
+            { name: 'México', code: 'LATAM' },
+            { name: 'Colombia', code: 'LATAM' },
+            { name: 'Perú', code: 'LATAM' },
+            { name: 'Paraguay', code: 'LATAM' },
+            { name: 'Ecuador', code: 'LATAM' },
+            { name: 'Bolivia', code: 'LATAM' }
+        ];
+
+        let currentRegion = 'ARG';
+        let selectedPlanForModal = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPricing();
+            initCinemaScrollAndBgParallax();
+            initSearchEngine();
         });
-      });
-      
-      // 6. Lazy load para iframes
-      if ('loading' in HTMLIFrameElement.prototype) {
-        document.querySelectorAll('iframe[loading="lazy"]').forEach(iframe => {
-          iframe.src = iframe.src;
-        });
-      }
-    });
-  </script>
+
+        // RENDER DE TARIFAS REGIONALES
+        function renderPricing() {
+            const data = PRICING_DATA[currentRegion];
+            const grid = document.getElementById('pricing-grid');
+            grid.innerHTML = '';
+
+            document.getElementById('badge-flag').textContent = data.flag;
+            document.getElementById('badge-text').textContent = data.suffix;
+
+            data.plans.forEach(plan => {
+                const isPopular = plan.badge !== null;
+                const card = document.createElement('div');
+                card.className = `glass-card p-8 rounded-3xl relative flex flex-col justify-between ${
+                    isPopular ? 'border-purpleNeon shadow-xl shadow-purpleNeon/20 scale-105 z-10' : ''
+                }`;
+
+                card.innerHTML = `
+                    <div>
+                        ${isPopular ? `
+                            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purpleNeon to-cyanNeon text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                                ${plan.badge}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-white mb-2">${plan.name}</h3>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-3xl md:text-4xl font-extrabold text-white">${data.symbol}${plan.price}</span>
+                                <span class="text-xs font-semibold text-gray-400">${data.suffix}</span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 mb-8 border-t border-slate-800/80 pt-6">
+                            ${plan.features.map(feat => `
+                                <li class="flex items-start gap-3 text-xs text-gray-300">
+                                    <i class="fa-solid fa-circle-check text-cyanNeon mt-0.5 text-sm shrink-0"></i>
+                                    <span>${feat}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <button onclick="openLeadModal('${plan.name}', '${data.symbol}${plan.price} ${data.suffix}')" 
+                        class="w-full ${isPopular ? 'btn-neon' : 'glass-panel hover:bg-slate-800'} py-3.5 rounded-xl text-xs font-bold text-white tracking-wider uppercase transition-all">
+                        ELEGIR PLAN
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function switchRegion(regionCode) {
+            currentRegion = regionCode;
+            const btnArg = document.getElementById('btn-arg');
+            const btnLatam = document.getElementById('btn-latam');
+
+            if (regionCode === 'ARG') {
+                btnArg.className = 'px-5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-purpleNeon text-white border-purpleNeon shadow-lg shadow-purpleNeon/30';
+                btnLatam.className = 'px-5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-800 text-gray-400 border-slate-700 hover:text-white';
+            } else {
+                btnLatam.className = 'px-5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-purpleNeon text-white border-purpleNeon shadow-lg shadow-purpleNeon/30';
+                btnArg.className = 'px-5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-800 text-gray-400 border-slate-700 hover:text-white';
+            }
+
+            renderPricing();
+        }
+
+        // CONTROL DE SCROLLING & CAMBIO DINÁMICO DE IMAGEN DE FONDO
+        function initCinemaScrollAndBgParallax() {
+            const sections = document.querySelectorAll('.cinema-section');
+            const bgImages = document.querySelectorAll('.bg-canvas-img');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-10% 0px -10% 0px',
+                threshold: 0.25
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('cinema-active');
+
+                        // Cambiar la imagen del canvas de fondo si la sección tiene dataset
+                        const bgIdx = entry.target.getAttribute('data-bg-index');
+                        if (bgIdx !== null) {
+                            bgImages.forEach((img, idx) => {
+                                if (idx == bgIdx) {
+                                    img.classList.add('img-active');
+                                } else {
+                                    img.classList.remove('img-active');
+                                }
+                            });
+                        }
+                    } else {
+                        entry.target.classList.remove('cinema-active');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(sec => observer.observe(sec));
+        }
+
+        // BUSCADOR DE PAÍSES LATAM
+        function initSearchEngine() {
+            const input = document.getElementById('country-search');
+            const dropdown = document.getElementById('search-dropdown');
+            const list = document.getElementById('country-list');
+            const clearBtn = document.getElementById('clear-search');
+
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                if (query.length > 0) {
+                    clearBtn.classList.remove('hidden');
+                    const filtered = COUNTRIES_LATAM.filter(c => c.name.toLowerCase().includes(query));
+                    if (filtered.length > 0) {
+                        list.innerHTML = filtered.map(c => `
+                            <li onclick="selectCountry('${c.name}', '${c.code}')" class="px-4 py-2 hover:bg-purpleNeon/20 cursor-pointer flex items-center justify-between text-gray-200">
+                                <span>${c.name}</span>
+                                <span class="text-[10px] text-cyanNeon">${c.code === 'ARG' ? 'ARS' : 'USD'}</span>
+                            </li>
+                        `).join('');
+                        dropdown.classList.remove('hidden');
+                    }
+                } else {
+                    dropdown.classList.add('hidden');
+                    clearBtn.classList.add('hidden');
+                }
+            });
+
+            clearBtn.addEventListener('click', () => {
+                input.value = '';
+                dropdown.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+            });
+        }
+
+        function selectCountry(name, code) {
+            document.getElementById('country-search').value = name;
+            document.getElementById('search-dropdown').classList.add('hidden');
+            switchRegion(code);
+        }
+
+        // ZOOM DE MOCKUPS
+        function openImageZoom(imgSrc, title) {
+            document.getElementById('zoom-img-target').src = imgSrc;
+            document.getElementById('zoom-img-title').textContent = title;
+            document.getElementById('image-zoom-modal').classList.remove('hidden');
+        }
+
+        function closeImageZoom() {
+            document.getElementById('image-zoom-modal').classList.add('hidden');
+        }
+
+        // MODAL LEADS & INTEGRACIÓN DE WHATSAPP REDIRECTION
+        function openLeadModal(planName, planPrice) {
+            selectedPlanForModal = { name: planName, price: planPrice };
+            document.getElementById('modal-plan-title').textContent = planName;
+            document.getElementById('modal-plan-price').textContent = `Inversión: ${planPrice}`;
+            document.getElementById('lead-modal').classList.remove('hidden');
+        }
+
+        function closeLeadModal() {
+            document.getElementById('lead-modal').classList.add('hidden');
+            document.getElementById('lead-form').reset();
+        }
+
+        function handleLeadSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('lead-name').value.trim();
+            const email = document.getElementById('lead-email').value.trim();
+            const idea = document.getElementById('lead-idea').value.trim();
+            const country = document.getElementById('badge-text').textContent;
+
+            const targetPhoneNumber = "543489686939";
+
+            const textMessage = 
+`🚀 *NEXO-ART // NUEVO LEAD SOLICITUD DE PROYECTO*
+
+📌 *DATOS DEL CLIENTE:*
+• Nombre: ${name}
+• Email: ${email}
+• Región/Moneda: ${country}
+
+💼 *PLAN SELECCIONADO:*
+• Servicio: ${selectedPlanForModal.name}
+• Tarifa: ${selectedPlanForModal.price}
+
+💡 *IDEA DEL PROYECTO:*
+"${idea}"
+
+--------------------------------------------------
+🤖 *SISTEMA:* META BUSINESS AGENT - Iniciar flujo de ventas automatizado para cierre.`;
+
+            const encodedMessage = encodeURIComponent(textMessage);
+            const whatsappUrl = `https://wa.me/${targetPhoneNumber}?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+            closeLeadModal();
+        }
+    </script>
 </body>
 </html>
