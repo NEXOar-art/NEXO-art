@@ -244,7 +244,7 @@
             <!-- Header Badge & Quick Links -->
             <div class="flex items-center gap-4">
                 <div id="region-badge" class="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 border border-purpleNeon/40 text-xs font-semibold text-cyanNeon">
-                    <span id="badge-flag">🇦🇷</span>
+                    <span id="badge-flag">🇦</span>
                     <span id="badge-text">ARS</span>
                 </div>
 
@@ -493,7 +493,7 @@
                 </div>
             </div>
 
-            <div id="pricing-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div id="pricing-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                 <!-- Inyectado por JS -->
             </div>
 
@@ -606,40 +606,69 @@
                 suffix: 'ARS',
                 plans: [
                     {
-                        name: 'LANDING + META BUSINESS AGENT',
-                        price: '98.000',
+                        name: 'PLAN STARTER',
+                        price: '120.000',
                         badge: null,
-                        features: [
-                            'Atención al cliente 24/7',
-                            'Informa y recomienda productos, precios, horarios y políticas',
-                            'Concreta ventas',
-                            'Atiende clientes provenientes de anuncios de Meta'
-                        ]
+                        description: 'Landing / web institucional.',
+                        features: [],
+                        maintenance: null
                     },
                     {
-                        name: 'PLAN AVANZADO',
-                        price: '210.000',
+                        name: 'PLAN BUSINESS',
+                        price: '230.000',
                         badge: 'MÁS VENDIDO',
-                        features: [
-                            'Todo lo del Básico',
-                            'Animaciones premium',
-                            'CRM automático',
-                            'META BUSINESS AGENT',
-                            'Mantenimiento mensual ($30 USD/mes)',
-                            'Entrega en 24hs'
-                        ]
+                        description: 'Web + catálogo + WhatsApp + Mantenimiento US$30/mes.',
+                        features: [],
+                        maintenance: null
                     },
                     {
-                        name: 'PLAN PREMIUM',
+                        name: 'PLAN E-COMMERCE',
                         price: '430.000',
                         badge: null,
+                        description: null,
                         features: [
-                            'Todo lo del Avanzado',
-                            'Web completa full custom - E-commerce',
-                            'SEO técnico avanzado',
-                            'Dashboard interactivo inteligente (Opcional $40 USD)',
-                            'Mantenimiento mensual ($60 USD/mes)'
-                        ]
+                            'Diseño',
+                            'Catálogo',
+                            'Categorías',
+                            'Buscador',
+                            'Filtros',
+                            'Fichas de producto',
+                            'Carrito',
+                            'Checkout',
+                            'WhatsApp',
+                            'Responsive',
+                            'SEO básico',
+                            'Carga inicial de productos',
+                            'Analítica',
+                            'Configuración comercial'
+                        ],
+                        maintenance: {
+                            title: '🔄 MANTENIMIENTO US$60/mes',
+                            items: [
+                                'Mantenimiento',
+                                'Actualizaciones',
+                                'Productos',
+                                'Soporte',
+                                'Backups',
+                                'Cambios',
+                                'Optimización',
+                                'Mejoras'
+                            ]
+                        }
+                    },
+                    {
+                        name: 'SKILL DASHBOARD INTERACTIVO',
+                        price: '60',
+                        suffixOverride: 'USD',
+                        badge: null,
+                        description: null,
+                        features: [
+                            'KPIs',
+                            'Métricas',
+                            'Gráficas',
+                            'Toma de decisiones por evaluación de datos'
+                        ],
+                        maintenance: null
                     }
                 ]
             },
@@ -650,40 +679,69 @@
                 suffix: 'USD',
                 plans: [
                     {
-                        name: 'LANDING + META BUSINESS AGENT',
+                        name: 'PLAN STARTER',
                         price: '90',
                         badge: null,
-                        features: [
-                            'Atención al cliente 24/7',
-                            'Informa y recomienda productos, precios, horarios y políticas',
-                            'Concreta ventas',
-                            'Atiende clientes provenientes de anuncios de Meta'
-                        ]
+                        description: 'Landing / web institucional.',
+                        features: [],
+                        maintenance: null
                     },
                     {
-                        name: 'PLAN AVANZADO',
-                        price: '180',
+                        name: 'PLAN BUSINESS',
+                        price: '120',
                         badge: 'MÁS VENDIDO',
-                        features: [
-                            'Todo lo del Básico',
-                            'Animaciones premium',
-                            'CRM automático',
-                            'META BUSINESS AGENT',
-                            'Mantenimiento mensual ($30 USD/mes)',
-                            'Entrega en 24hs'
-                        ]
+                        description: 'Web + catálogo + WhatsApp + Mantenimiento US$30/mes.',
+                        features: [],
+                        maintenance: null
                     },
                     {
-                        name: 'PLAN PREMIUM',
-                        price: '290',
+                        name: 'PLAN E-COMMERCE',
+                        price: '300',
                         badge: null,
+                        description: null,
                         features: [
-                            'Todo lo del Avanzado',
-                            'Web completa full custom - E-commerce',
-                            'SEO técnico avanzado',
-                            'Dashboard interactivo inteligente (Opcional $40 USD)',
-                            'Mantenimiento mensual ($60 USD/mes)'
-                        ]
+                            'Diseño',
+                            'Catálogo',
+                            'Categorías',
+                            'Buscador',
+                            'Filtros',
+                            'Fichas de producto',
+                            'Carrito',
+                            'Checkout',
+                            'WhatsApp',
+                            'Responsive',
+                            'SEO básico',
+                            'Carga inicial de productos',
+                            'Analítica',
+                            'Configuración comercial'
+                        ],
+                        maintenance: {
+                            title: '🔄 MANTENIMIENTO US$60/mes',
+                            items: [
+                                'Mantenimiento',
+                                'Actualizaciones',
+                                'Productos',
+                                'Soporte',
+                                'Backups',
+                                'Cambios',
+                                'Optimización',
+                                'Mejoras'
+                            ]
+                        }
+                    },
+                    {
+                        name: 'SKILL DASHBOARD INTERACTIVO',
+                        price: '60',
+                        suffixOverride: 'USD',
+                        badge: null,
+                        description: null,
+                        features: [
+                            'KPIs',
+                            'Métricas',
+                            'Gráficas',
+                            'Toma de decisiones por evaluación de datos'
+                        ],
+                        maintenance: null
                     }
                 ]
             }
@@ -721,6 +779,8 @@
 
             data.plans.forEach(plan => {
                 const isPopular = plan.badge !== null;
+                const symbol = plan.symbolOverride || data.symbol;
+                const suffix = plan.suffixOverride || data.suffix;
                 const card = document.createElement('div');
                 card.className = `glass-card p-8 rounded-3xl relative flex flex-col justify-between ${
                     isPopular ? 'border-purpleNeon shadow-xl shadow-purpleNeon/20 scale-105 z-10' : ''
@@ -737,23 +797,42 @@
                         <div class="mb-6">
                             <h3 class="text-lg font-bold text-white mb-2">${plan.name}</h3>
                             <div class="flex items-baseline gap-1">
-                                <span class="text-3xl md:text-4xl font-extrabold text-white">${data.symbol}${plan.price}</span>
-                                <span class="text-xs font-semibold text-gray-400">${data.suffix}</span>
+                                <span class="text-3xl md:text-4xl font-extrabold text-white">${symbol}${plan.price}</span>
+                                <span class="text-xs font-semibold text-gray-400">${suffix}</span>
                             </div>
+                            ${plan.description ? `
+                                <p class="text-[11px] text-gray-400 mt-3 leading-relaxed">${plan.description}</p>
+                            ` : ''}
                         </div>
 
-                        <ul class="space-y-3 mb-8 border-t border-slate-800/80 pt-6">
-                            ${plan.features.map(feat => `
-                                <li class="flex items-start gap-3 text-xs text-gray-300">
-                                    <i class="fa-solid fa-circle-check text-cyanNeon mt-0.5 text-sm shrink-0"></i>
-                                    <span>${feat}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
+                        ${plan.features && plan.features.length ? `
+                            <ul class="space-y-3 mb-8 border-t border-slate-800/80 pt-6">
+                                ${plan.features.map(feat => `
+                                    <li class="flex items-start gap-3 text-xs text-gray-300">
+                                        <i class="fa-solid fa-circle-check text-cyanNeon mt-0.5 text-sm shrink-0"></i>
+                                        <span>${feat}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        ` : ''}
+
+                        ${plan.maintenance ? `
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyanNeon/30">
+                                <h4 class="text-[10px] font-bold text-cyanNeon uppercase tracking-widest mb-3">${plan.maintenance.title}</h4>
+                                <ul class="space-y-1.5">
+                                    ${plan.maintenance.items.map(item => `
+                                        <li class="flex items-start gap-2 text-[11px] text-gray-300">
+                                            <i class="fa-solid fa-wrench text-purpleGlow mt-0.5 text-[10px] shrink-0"></i>
+                                            <span>${item}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
                     </div>
 
-                    <button onclick="openLeadModal('${plan.name}', '${data.symbol}${plan.price} ${data.suffix}')" 
-                        class="w-full ${isPopular ? 'btn-neon' : 'glass-panel hover:bg-slate-800'} py-3.5 rounded-xl text-xs font-bold text-white tracking-wider uppercase transition-all">
+                    <button onclick="openLeadModal('${plan.name}', '${symbol}${plan.price} ${suffix}')" 
+                        class="w-full ${isPopular ? 'btn-neon' : 'glass-panel hover:bg-slate-800'} py-3.5 rounded-xl text-xs font-bold text-white tracking-wider uppercase transition-all mt-8">
                         ELEGIR PLAN
                     </button>
                 `;
